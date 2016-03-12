@@ -38,7 +38,7 @@
     <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96">
     <link rel="icon" type="image/png" href="/assets/favicon/android-chrome-192x192.png" sizes="192x192">
     <link rel="icon" type="image/png" href="/assets/favicon/favicon-16x16.png" sizes="16x16">
-    <link rel="manifest" href="/manifest.json?1111111111111111111111111111111111111111111111111115">
+    <link rel="manifest" href="/manifest.json?">
     <link rel="shortcut icon" href="/assets/favicon/favicon.ico">
     <meta name="msapplication-TileColor" content="#19103a">
     <meta name="msapplication-TileImage" content="/assets/favicon/mstile-144x144.png">
@@ -51,12 +51,20 @@
 <body id="body">
     
     <form>
-        <input type="text" name="phoneNumber">
+        <label for="phoneNumber">Mobile Number: </label>
+        <input type="text" name="phoneNumber" id="phoneNumber">
+        <button type="button" id="sendPhoneNumber">Send</button>
     </form>
 
 
-</body>
+
+
+
+
+
+
+<!-- KEEP THESE JS FILES AT THE BOTTOM OF THE BODY -->
  <link as="script" href="./js/app-0000001.js" rel="preload" />
   <link as="script" href="./js/socket.io.js" rel="preload" />
-
+</body>
 </html>

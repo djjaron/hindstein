@@ -11,5 +11,5 @@ var express = require('express'),
 app.get('/', function (req, res) {
   res.send('Hello World');
 });
- 
+ console.log('Starting Hindste');
 app.listen(8080);
