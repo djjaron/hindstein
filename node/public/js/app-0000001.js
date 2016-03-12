@@ -2,6 +2,7 @@
 /* global require */
 /* global console */
 /* global module */
+/* global io */
 /* global document */
 /* global __dirname */
 
@@ -9,17 +10,27 @@
 
 (function () {
 ///---------------------- START ------------------------    
-    
-    
-    console.log('STARTING');
+ 
+//---- Grab a socket
+ //   var socket = io.connect('http://hindste.in');
+        var socket = io.connect('http://localhost:8080/');
 
+
+//---- Event Listeners
     document.getElementById("sendPhoneNumber").addEventListener("click", sendPhoneNumber);
 
-    var sendPhoneNumber = function () {
-        console.log('FIRE BUTTON');
-        var phoneNumber = document.getElementById("phoneNumber");
-        console.log(phoneNumber);
-    };
-   
+//----- Functoins
+    function sendPhoneNumber() {
+        var phoneNumber = document.getElementById("phoneNumber").value;
+        socket.emit('phoneNumber', { phoneNumber: phoneNumber});
+    }
+    
+//----- Incoming Socket
+    
+  socket.on('phoneNumber', function (data) {
+    console.log(data);
+  });
+
+
  ///---------------------- END ------------------------     
 })();
