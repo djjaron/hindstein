@@ -33,8 +33,6 @@ io.on('connection', function (socket) {
     //------------------- SOCKETS ---------------------  
     // Socket phoneNumber
     socket.on('phoneNumber', function (data) {
-        socket.emit('phoneNumber', { phoneNumber: 'saved' });
-        console.log(data);
         twillioSend('+19496671979', '+1 424-231-2986', 'BODY MESSAGE TEST', 'http://s3-us-west-2.amazonaws.com/images.hellogiggles.com/uploads/2014/04/14/2013-Kate-Upton-HD-Wallpapers-e1360405079523-500x375c.jpeg');
     });
     
@@ -48,6 +46,7 @@ io.on('connection', function (socket) {
             mediaUrl: mediaUrl,
         }, function (err, message) {
             console.log(message.sid);
+            socket.emit('phoneNumber', { tillioError: 'err', twillioMessage: message});
             // SAVE TO DATABASE
         });
     }
