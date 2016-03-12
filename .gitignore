@@ -1,0 +1,7 @@
+.env
+node_modules
+typings
+logs
+data.json
+npm-debug.log
+rethinkdb_data
