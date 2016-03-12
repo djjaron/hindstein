@@ -13,8 +13,6 @@
  
 //---- Grab a socket
    var socket = io.connect('http://hindste.in');
- //       var socket = io.connect('http://localhost:8080/');
-
 
 //---- Event Listeners
     document.getElementById("sendPhoneNumber").addEventListener("click", sendPhoneNumber);
