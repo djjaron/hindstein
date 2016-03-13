@@ -68,9 +68,10 @@
     
 //----- Incoming Socket
     
-  socket.on('phoneNumber', function (data) {
+  socket.on('phoneNumberGood', function (data) {
     console.log('SERVER RESPONDED');
     console.log(data);
+    window.location="http://www.hindste.in/welcome/";
   });
 
 
