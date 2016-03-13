@@ -36,7 +36,7 @@ io.on('connection', function (socket) {
     // Welcome Message
     socket.on('phoneNumber', function (data) {
         console.log('data: '+data);
-        console.log('dae.phoneNumber'+data.phoneNumber);
+        console.log('data.phoneNumber'+data.phoneNumber);
         twillioSend(data.phoneNumber, '+1 424-231-2986', 'Welcome to Hindstein!', 'http://www.hindste.in/img/uploads/000000000001.gif');
     });
     
@@ -46,7 +46,7 @@ io.on('connection', function (socket) {
         console.log('To '+to);
         console.log('From '+ from);
         console.log('Body '+body);
-        console.log('mediaUrl '+mediaURL);
+        console.log('mediaUrl '+mediaUrl);
         
         client.messages.create({
             to: to,
@@ -56,7 +56,7 @@ io.on('connection', function (socket) {
         }, function (err, message) {
             console.log('ERR'+err);
             console.log('message'+message);
-            socket.emit('phoneNumber', { tillioError: 'err', twillioMessage: message});
+            socket.emit('phoneNumber', { twillioError: 'err', twillioMessage: message});
             // SAVE TO DATABASE
         });
     }
