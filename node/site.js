@@ -54,8 +54,10 @@ io.on('connection', function (socket) {
             body: body,
             mediaUrl: mediaUrl,
         }, function (err, message) {
-            console.log('ERR'+err);
-            console.log('message'+message);
+            console.log('------ ERROR ------');
+            console.log(err);
+            console.log('------ MESSAGE------');
+            console.log(message);
             socket.emit('phoneNumber', { twillioError: 'err', twillioMessage: message});
             // SAVE TO DATABASE
         });

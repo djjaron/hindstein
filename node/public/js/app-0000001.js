@@ -38,6 +38,7 @@
             var readyNumber = formatted_number.replace(/\D/g,'');
             console.log('We SENT: +'+readyNumber);
             socket.emit('phoneNumber', { phoneNumber: '+'+readyNumber});
+             document.getElementById("number").style.opacity = "0";
         }   
     }
     
@@ -68,7 +69,8 @@
 //----- Incoming Socket
     
   socket.on('phoneNumber', function (data) {
-    console.log('SERVER REPLIED :' +data);
+    console.log('SERVER RESPONDED');
+    console.log(data);
   });
 
 
