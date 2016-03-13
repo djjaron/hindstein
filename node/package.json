@@ -10,7 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.4",
+    "firebase": "^2.4.1",
     "socket.io": "^1.4.5",
-    "twilio": "^2.9.0"
+    "twilio": "^2.9.0",
+    "uuid-js": "^0.7.5"
   }
 }
