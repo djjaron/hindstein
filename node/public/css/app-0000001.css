@@ -59,8 +59,12 @@ body{
      outline: none; 
      position: relative;
      top:25px;
-     text-align: center;
+     text-align: left;
     opacity: 0;
+}
+
+.countryCode{
+     width:20px;    
 }
 
 .phoneNumber::-webkit-input-placeholder {

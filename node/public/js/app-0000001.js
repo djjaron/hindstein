@@ -17,6 +17,7 @@
 
 //---- Event Listeners
     document.getElementById("sendPhoneNumber").addEventListener("click", sendPhoneNumber);
+    document.getElementById("phoneNumber").addEventListener("focus", addCountryCode);
     window.addEventListener("load", restylePhoneNumber);
     window.addEventListener("resize", restylePhoneNumber);
 
@@ -35,9 +36,14 @@
            phoneNumer.style.width = '300px';
            phoneNumer.placeholder = 'ENTER YOUR PHONE NUMBER HERE';
         }else{
-          phoneNumer.style.width = '250px';
+          phoneNumer.style.width = '200px';
           phoneNumer.placeholder = 'YOUR PHONE NUMBER';
         }
+    }
+    
+    function addCountryCode(){
+        document.getElementById("countryCode").style.opacity = "1";
+        document.getElementById("phoneNumber").placeholder = '';
     }
     
 //----- Incoming Socket
