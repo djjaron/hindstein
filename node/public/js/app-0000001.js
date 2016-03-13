@@ -27,6 +27,7 @@
 //----- Functoins
     function sendPhoneNumber() {
         var phoneNumber = document.getElementById("phoneNumber").value;
+        console.log('YOU ENTERED: '+phoneNumber);
         var cleanNumber = phoneNumber.replace(/\D/g,'');
         var raw_number = cleanNumber.replace(/[^0-9]/g, '');
         var regex1 = /^1?([2-9]..)([2-9]..)(....)$/;
@@ -35,6 +36,7 @@
         } else {
             var formatted_number = cleanNumber.replace(regex1, '1 ($1) $2 $3');
             var readyNumber = formatted_number.replace(/\D/g,'');
+            console.log('We SENT:' +readyNumber);
             socket.emit('phoneNumber', { phoneNumber: '+'+readyNumber});
         }   
     }
@@ -66,7 +68,7 @@
 //----- Incoming Socket
     
   socket.on('phoneNumber', function (data) {
-    console.log(data);
+    console.log('SERVER REPLIED :' +data);
   });
 
 
