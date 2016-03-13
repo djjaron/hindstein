@@ -24,7 +24,7 @@ app.get('/', function (req, res) {
     console.log('Page Served');
 });
 
-// start the server in port 8080 (nginx is listening)
+// start the server in port 9000 (nginx is listening)
 server.listen(9000);
 
 
