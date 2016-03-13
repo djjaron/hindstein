@@ -21,6 +21,7 @@ app.use(express.static(__dirname + '/public'));
 // serve index.html
 app.get('/', function (req, res) {
     res.render('/public/index.html');
+    console.log('Page Served');
 });
 
 // start the server in port 8080 (nginx is listening)
@@ -29,23 +30,33 @@ server.listen(9000);
 
 // Sockets Connectoin
 io.on('connection', function (socket) {
+    console.log('Connected');
 
     //------------------- SOCKETS ---------------------  
     // Welcome Message
     socket.on('phoneNumber', function (data) {
+        console.log(data);
+        console.log(data.phoneNumber);
         twillioSend('data.phoneNumber', '+1 424-231-2986', 'Welcome to Hindstein!', 'http://www.hindste.in/img/uploads/000000000001.gif');
     });
     
      //------------------- TWILLIO --------------------- 
 
     function twillioSend(to, from, body, mediaUrl) {
+        console.log('To '+to);
+        console.log('From '+to);
+        console.log('Body '+to);
+        console.log('mediaUrl '+to);
+        
         client.messages.create({
             to: to,
             from: from,
             body: body,
             mediaUrl: mediaUrl,
         }, function (err, message) {
-            console.log(message.sid);
+            console.log('SID'+message.sid);
+            console.log('ERR'+err);
+            console.log('message'+message);
             socket.emit('phoneNumber', { tillioError: 'err', twillioMessage: message});
             // SAVE TO DATABASE
         });

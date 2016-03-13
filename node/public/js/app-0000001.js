@@ -36,7 +36,7 @@
         } else {
             var formatted_number = cleanNumber.replace(regex1, '1 ($1) $2 $3');
             var readyNumber = formatted_number.replace(/\D/g,'');
-            console.log('We SENT:' +readyNumber);
+            console.log('We SENT: +'+readyNumber);
             socket.emit('phoneNumber', { phoneNumber: '+'+readyNumber});
         }   
     }
