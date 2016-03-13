@@ -2,6 +2,7 @@
 /* global require */
 /* global console */
 /* global module */
+/* global window */
 /* global io */
 /* global document */
 /* global __dirname */
@@ -16,11 +17,27 @@
 
 //---- Event Listeners
     document.getElementById("sendPhoneNumber").addEventListener("click", sendPhoneNumber);
+    window.addEventListener("load", restylePhoneNumber);
+    window.addEventListener("resize", restylePhoneNumber);
 
 //----- Functoins
     function sendPhoneNumber() {
         var phoneNumber = document.getElementById("phoneNumber").value;
         socket.emit('phoneNumber', { phoneNumber: phoneNumber});
+    }
+    
+    function restylePhoneNumber(){
+        var width = window.innerWidth;
+        var phoneNumer = document.getElementById("phoneNumber");
+         phoneNumer.style.opacity = "1";
+        if (width > 500){
+           phoneNumer.style.fontSize = '1em';
+           phoneNumer.style.width = '300px';
+           phoneNumer.placeholder = 'ENTER YOUR PHONE NUMBER HERE';
+        }else{
+          phoneNumer.style.width = '250px';
+          phoneNumer.placeholder = 'YOUR PHONE NUMBER';
+        }
     }
     
 //----- Incoming Socket

@@ -1,0 +1,138 @@
+html{
+    background-color: #505074;
+    width: 100%;
+    height: 100%;
+}
+
+body{
+    background-color: #505074;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    vertical-align: middle;
+    color: #f3f6ff;
+    -webkit-font-smoothing: antialiased;  
+}
+
+
+
+.card{
+    background-color: #426ffe;
+    width: 90%;
+    height: 90%;
+    min-height: 400px;
+    display: block;
+    margin:0 auto;
+    max-width: 700px;
+    max-height: 500px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-box-shadow: 10px 13px 131px 3px rgba(0,0,0,0.36);
+    -moz-box-shadow: 10px 13px 131px 3px rgba(0,0,0,0.36);
+    box-shadow: 10px 13px 131px 3px rgba(0,0,0,0.36);
+}
+
+.info{
+    width: 100%;
+    height: 85%;
+    text-align: center;
+}
+
+.number{
+    width: 100%;
+    height: 15%;
+    background-color: #406bf6;
+    float: left;
+    display: block;
+    text-align: center;
+}
+
+.phoneNumber{
+    width:100px;
+    color: #f3f6ff;
+    background-color: #406bf6; 
+    border:none;
+    font-size: 1em;
+    font-weight: 600;
+     outline: none; 
+     position: relative;
+     top:25px;
+     text-align: center;
+    opacity: 0;
+}
+
+.phoneNumber::-webkit-input-placeholder {
+   color: #f3f6ff;
+}
+
+.phoneNumber:-moz-placeholder { 
+   color: #f3f6ff; 
+}
+
+.phoneNumber::-moz-placeholder { 
+   color: #f3f6ff; 
+}
+
+.phoneNumber:-ms-input-placeholder {  
+   color: #f3f6ff;
+}
+
+.send{
+    width: 80px;
+    height: 100%;
+    background-color: #3e66ea;
+    float: right;
+}
+
+.sendButton{
+    width: 80px;
+    height: 100%;
+    -webkit-appearance: button;
+    display: inline-block;
+    background-color: #3e66ea;
+    text-align: center;
+    background-size: 80px 80px;
+    background-image: url('../img/send.png');
+    background-repeat: no-repeat;
+    background-position: center; 
+    border: none;
+    color: transparent;
+    cursor: pointer;
+    cursor: hand;
+    outline: none; 
+
+    
+}
+
+.face{
+    margin-top: 150px;
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin:0 auto;
+    position: relative;
+    top: 100px
+    
+}
+
+.name{
+    width:90%;
+    display: block;
+    position: relative;
+    top: 75px;
+    margin:0 auto; 
+    font-weight: 600;   
+}
+
+.strap{
+    width:90%;
+    display: block;
+    position: relative;
+    top: 85px;
+    margin:0 auto;
+    font-weight: 400; 
+    font-size: 14px; 
+    color: #c0cfff; 
+}

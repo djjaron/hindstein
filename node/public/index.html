@@ -1,12 +1,12 @@
 <html>
-
+    <script src="/js/socket.io.js"></script>
     <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# video: http://ogp.me/ns/video#">
     <meta charset="UTF-8">
     <meta name="google-site-verification" content="">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/css/app-0000001.css">
-    <script src="/js/socket.io.js"></script>
     <base href="/">
-    
+
     <title>Hindste.in</title>
     
     <meta name="description" content="Hand picked beta products from lowercase founders and friends">
@@ -50,14 +50,24 @@
 </head>
 
 <body id="body">
-    
-    <form>
-        <label for="phoneNumber">Mobile Number: </label>
-        <input type="text" name="phoneNumber" id="phoneNumber">
-        <button type="button" id="sendPhoneNumber">Send</button>
-    </form>
+<div class="card">
+    <div class="info">
+       <div class="face"><img src="img/face.png"></div>
+          <h1 class="name">J.R. HINDSTEIN </h1>
+             <h2 class="strap">Discover hand picked beta products.</h2>
+    </div>
+
+    <div class="number">
+        <input type="text" class="phoneNumber" id="phoneNumber"  placeholder="ENTER YOUR PHONE NUMBER HERE">
 
 
+        <div class="send">
+           <input type="submit" class="sendButton" id="sendPhoneNumber">
+        </div>
+    </div>
+
+
+</div>
 
 
 
