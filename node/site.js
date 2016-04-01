@@ -64,12 +64,11 @@ io.on('connection', function (socket) {
         if(isAdmin == false){
             socket.emit('authAdmin', {auth:'failed'}); 
         } else {
-            var subscriberCount = countSubscribers();
-            console.log('A'+subscriberCount);
-            socket.emit('authAdmin', {auth:'passed', subscribers:subscriberCount});   //   <<== SEND ALL DATA FOR ADMIN INTITAL STATE
+            var subscriberCount = countSubscribers(function(){
+                console.log('A'+subscriberCount);
+                socket.emit('authAdmin', {auth:'passed', subscribers:subscriberCount});   //   <<== SEND ALL DATA FOR ADMIN INTITAL STATE
+            }); 
         }
-        
-
     });
     
     //------------------- TWILLIO --------------------- 
@@ -140,11 +139,13 @@ io.on('connection', function (socket) {
     //-- COUNT SUBSCRIBRS
     function countSubscribers() {
         var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/phoneNumbers/");
-            myFirebaseRef.once("value", function(snapshot) {
-            var count = snapshot.numChildren();
-            console.log('B'+count);
-            return count;
-            });
+        ref.once("value", function(snapshot) {
+        var subscriberCount = snapshot.numChildren();
+        console.log("B"+subscriberCount);
+        return subscriberCount;
+        });
+
+
     }
        
     //------------------- END ---------------------  
