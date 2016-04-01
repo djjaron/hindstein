@@ -19,6 +19,8 @@
     document.getElementById("sendPhoneNumber").addEventListener("click", sendPhoneNumber);
     document.getElementById("phoneNumber").addEventListener("focus", addCountryCode);
     document.getElementById("number").addEventListener("click", focusPhoneNumber);
+//--Admin
+    document.getElementById("login").addEventListener("click", adminLogin);
     
     
     window.addEventListener("load", restylePhoneNumber);
@@ -66,12 +68,24 @@
          document.getElementById("phoneNumber").focus();
     }
     
+    function adminLogin(){
+        var userName = document.getElementById("username");
+        var password = document.getElementById("password");
+        socket.emit('adminLogin', { username:userName, password:password});
+    }
+    
 //----- Incoming Socket
     
   socket.on('phoneNumberGood', function (data) {
     console.log('SERVER RESPONDED');
     console.log(data);
     window.location="http://www.hindste.in/welcome/";
+  });
+  
+  socket.on('adminLogin', function (data) {
+    console.log('SERVER RESPONDED');
+    console.log(data);
+    window.location="http://www.hindste.in/admin/home/";
   });
 
 

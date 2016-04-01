@@ -42,6 +42,13 @@ io.on('connection', function (socket) {
         twillioSend(data.phoneNumber, '+1 424-231-2986', 'Welcome to Hindstein!', 'http://www.hindste.in/img/uploads/000000000001.gif');
     });
     
+      socket.on('adminLogin', function (data) {
+        console.log('data: ' + data);
+        var username = data.username;
+        var password = data.passwrod;
+        // do login with firebase
+    });
+    
     //------------------- TWILLIO --------------------- 
 
     function twillioSend(to, from, body, mediaUrl) {
