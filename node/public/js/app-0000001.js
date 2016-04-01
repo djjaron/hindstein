@@ -87,7 +87,7 @@
         console.log('fire');
         var card = document.getElementById("body");
         card.classList.add("hide");
-        uid = localStorage.getItem("uid");
+        var uid = localStorage.getItem("uid");
         if (!uid){
         window.location="http://www.hindste.in/admin/";
         } else{
@@ -103,7 +103,7 @@
         if(data.auth == 'passed'){
             card.classList.remove("hide");
         } else {
-            window.location="http://www.hindste.in/welcome/";
+            window.location="./welcome/";
         } 
   });
 
@@ -119,7 +119,7 @@
         }
         if(data.login =='passed'){
             localStorage.setItem("uid", data.uid);
-            window.location="http://www.hindste.in/admin/home/";
+            window.location="./admin/home/";
         }
   });
 

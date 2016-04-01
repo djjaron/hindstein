@@ -60,11 +60,14 @@ io.on('connection', function (socket) {
     
    // Auth Admin
     socket.on('authAdmin', function (data) {
-        // TODO Check the UID exists in the admin table 
-        // IF it doesnt exist
-        //  socket.emit('authAdmin', {auth:'failed'}); 
-        // ELSE  
-        //  socket.emit('authAdmin', {auth:'passed'});   
+        var isAdmin = checkAdmin(uid);
+        if(isAdmin == false){
+            socket.emit('authAdmin', {auth:'failed'}); 
+        } else {
+            socket.emit('authAdmin', {auth:'passed'});   //   <<== SEND ALL DATA FOR ADMIN INTITAL STATE
+        }
+        
+
     });
     
     //------------------- TWILLIO --------------------- 
@@ -118,6 +121,17 @@ io.on('connection', function (socket) {
         var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/admin/" + uid);
         myFirebaseRef.set({
             uid: uid         
+        });
+    }
+    
+    //-- IS USER ADMIN
+    function checkAdmin(uid) {
+        var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/admin/" + uid);
+        myFirebaseRef.once("value", function(snapshot) {
+            console.log(snapshot.val());
+            return true;
+        }, function (errorObject) {
+            return false;
         });
     }
        
