@@ -43,10 +43,12 @@ io.on('connection', function (socket) {
     });
     
       socket.on('adminLogin', function (data) {
-        console.log('un: ' + data.username);
-        console.log('pw: ' + data.password);
+   
         var username = data.username;
         var password = data.passwrod;
+        
+        console.log('un: ' + username);
+        console.log('pw: ' + password);
         // do login with firebase
     });
     
