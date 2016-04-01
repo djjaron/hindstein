@@ -45,7 +45,7 @@ io.on('connection', function (socket) {
       socket.on('adminLogin', function (data) {
    
         var username = data.username;
-        var password = data.passwrod;
+        var password = data.password;
         
         console.log('un: ' + username);
         console.log('pw: ' + password);

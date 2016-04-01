@@ -74,8 +74,8 @@
     }
     
     function adminLogin(){
-        var userName = document.getElementById("username");
-        var password = document.getElementById("password");
+        var userName = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
         socket.emit('adminLogin', { username:userName, password:password});
     }
     
