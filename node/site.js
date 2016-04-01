@@ -64,10 +64,21 @@ io.on('connection', function (socket) {
         if(isAdmin == false){
             socket.emit('authAdmin', {auth:'failed'}); 
         } else {
-            var subscriberCount = countSubscribers(function(){
-                console.log('A'+subscriberCount);
-                socket.emit('authAdmin', {auth:'passed', subscribers:subscriberCount});   //   <<== SEND ALL DATA FOR ADMIN INTITAL STATE
-            }); 
+            
+
+            new Promise(function(resolve, reject) {
+            // A mock async action using setTimeout
+            // setTimeout(function() { resolve(10); }, 3000);
+            resolve(countSubscribers());
+            })
+            .then(function(result) {
+                console.log('A: '+result);
+                socket.emit('authAdmin', {auth:'passed', subscribers:result});
+            });
+            // From the console:
+            // 10
+            
+            
         }
     });
     
@@ -141,7 +152,7 @@ io.on('connection', function (socket) {
         var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/phoneNumbers/");
         myFirebaseRef.once("value", function(snapshot) {
         var subscriberCount = snapshot.numChildren();
-        console.log("B"+subscriberCount);
+        console.log("B: "+subscriberCount);
         return subscriberCount;
         });
 
