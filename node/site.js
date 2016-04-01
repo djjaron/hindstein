@@ -139,7 +139,7 @@ io.on('connection', function (socket) {
     //-- COUNT SUBSCRIBRS
     function countSubscribers() {
         var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/phoneNumbers/");
-        ref.once("value", function(snapshot) {
+        myFirebaseRef.once("value", function(snapshot) {
         var subscriberCount = snapshot.numChildren();
         console.log("B"+subscriberCount);
         return subscriberCount;
