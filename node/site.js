@@ -65,20 +65,14 @@ io.on('connection', function (socket) {
             socket.emit('authAdmin', {auth:'failed'}); 
         } else {
             
-
+            
             new Promise(function(resolve, reject) {
-            // A mock async action using setTimeout
-            // setTimeout(function() { resolve(10); }, 3000);
-            var count = countSubscribers();
-            console.log(count);
-            resolve(count);
+                resolve(countSubscribers());
             })
             .then(function(result) {
                 console.log('A: '+result);
                 socket.emit('authAdmin', {auth:'passed', subscribers:result});
             });
-            // From the console:
-            // 10
             
             
         }
@@ -157,8 +151,7 @@ io.on('connection', function (socket) {
         console.log("B: "+subscriberCount);
         return subscriberCount;
         });
-
-
+        
     }
        
     //------------------- END ---------------------  
