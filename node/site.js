@@ -65,6 +65,7 @@ io.on('connection', function (socket) {
             socket.emit('authAdmin', {auth:'failed'}); 
         } else {
             var subscriberCount = countSubscribers();
+            console.log('A'+subscriberCount);
             socket.emit('authAdmin', {auth:'passed', subscribers:subscriberCount});   //   <<== SEND ALL DATA FOR ADMIN INTITAL STATE
         }
         
@@ -141,6 +142,7 @@ io.on('connection', function (socket) {
         var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/phoneNumbers/");
             myFirebaseRef.once("value", function(snapshot) {
             var count = snapshot.numChildren();
+            console.log('B'+count);
             return count;
             });
     }

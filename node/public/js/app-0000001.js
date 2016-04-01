@@ -103,6 +103,7 @@
         if(data.auth == 'passed'){
             var card = document.getElementById("body");
             card.classList.remove("hide");
+            console.log(data.subscribers);
         } else {
             window.location="./welcome/";
         } 
