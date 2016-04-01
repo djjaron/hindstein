@@ -60,7 +60,7 @@ io.on('connection', function (socket) {
     
    // Auth Admin
     socket.on('authAdmin', function (data) {
-        var isAdmin = checkAdmin(uid);
+        var isAdmin = checkAdmin(data.uid);
         if(isAdmin == false){
             socket.emit('authAdmin', {auth:'failed'}); 
         } else {
