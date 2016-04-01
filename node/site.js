@@ -41,7 +41,7 @@ io.on('connection', function (socket) {
         console.log('data.phoneNumber' + data.phoneNumber);
         twillioSend(data.phoneNumber, '+1 424-231-2986', 'Welcome to Hindstein!', 'http://www.hindste.in/img/uploads/000000000001.gif');
     });
-    
+    // Admin Login
       socket.on('adminLogin', function (data) {           
         var ref = new Firebase("https://hindstein.firebaseio.com");
         ref.authWithPassword({
@@ -49,14 +49,22 @@ io.on('connection', function (socket) {
                 password : data.password
         }, function(error, authData) {
             if (error) {
-                 socket.emit('adminLogin', {login:failed});
-                console.log("Login Failed!", error);
+                 socket.emit('adminLogin', {login:'failed'});
             } else {
-                socket.emit('adminLogin', {login:authData.uid});
-                console.log("Authenticated successfully with payload:", authData.uid);
+                saveAdmin(authData.uid);
+                socket.emit('adminLogin', {login:'passed', uid:authData.uid});
             }
         });
 
+    });
+    
+   // Auth Admin
+    socket.on('authAdmin', function (data) {
+        // TODO Check the UID exists in the admin table 
+        // IF it doesnt exist
+        //  socket.emit('authAdmin', {auth:'failed'}); 
+        // ELSE  
+        //  socket.emit('authAdmin', {auth:'passed'});   
     });
     
     //------------------- TWILLIO --------------------- 
@@ -102,6 +110,14 @@ io.on('connection', function (socket) {
         var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/phoneNumbers/" + id);
         myFirebaseRef.set({
             phoneNumber: phoneNumber         
+        });
+    }
+    
+    //-- SAVE ADMIN
+    function saveAdmin(uid) {
+        var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/admin/" + uid);
+        myFirebaseRef.set({
+            uid: uid         
         });
     }
        

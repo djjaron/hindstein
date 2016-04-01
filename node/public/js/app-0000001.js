@@ -25,9 +25,13 @@
     window.addEventListener("load", restylePhoneNumber);
     window.addEventListener("resize", restylePhoneNumber);
     }
-//--Admin
+//--Admin Login
     if(loc =='/admin/'){
     document.getElementById("login").addEventListener("click", adminLogin);
+    }
+//--Admin Home
+    if(loc =='/admin/home/'){
+    authAdmin();
     }
 
 
@@ -79,20 +83,45 @@
         socket.emit('adminLogin', { username:userName, password:password});
     }
     
-//----- Incoming Socket
+    function authAdmin(){
+        console.log('fire');
+        var card = document.getElementById("body");
+        card.classList.add("hide");
+        uid = localStorage.getItem("uid");
+        if (!uid){
+        window.location="http://www.hindste.in/admin/";
+        } else{
+        socket.emit('authAdmin', { uid:uid });
+        };
+
+    }
     
-  socket.on('phoneNumberGood', function (data) {
-    console.log('SERVER RESPONDED');
-    console.log(data);
-    window.location="http://www.hindste.in/welcome/";
-  });
-  
-  socket.on('adminLogin', function (data) {
-    console.log('SERVER RESPONDED');
-    console.log(data);
-    window.location="http://www.hindste.in/admin/home/";
+//----- Incoming Socket
+
+//-- Auth Admin
+  socket.on('authAdmin', function (data) {
+        if(data.auth == 'passed'){
+            card.classList.remove("hide");
+        } else {
+            window.location="http://www.hindste.in/welcome/";
+        } 
   });
 
+//-- Phone number    
+  socket.on('phoneNumberGood', function (data) {
+        window.location="http://www.hindste.in/welcome/";
+  });
+  
+//-- Admin login
+  socket.on('adminLogin', function (data) {
+        if(data.login =='failed'){
+            //TODO: tell the user it failed
+        }
+        if(data.login =='passed'){
+            localStorage.setItem("uid", data.uid);
+            window.location="http://www.hindste.in/admin/home/";
+        }
+  });
 
  ///---------------------- END ------------------------     
 })();

@@ -247,3 +247,7 @@ html{
     cursor: hand;
     cursor: pointer;
 }
+
+.hide{
+    display: none;
+}
