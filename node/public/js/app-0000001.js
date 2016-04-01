@@ -84,7 +84,6 @@
     }
     
     function authAdmin(){
-        console.log('fire');
         var card = document.getElementById("body");
         card.classList.add("hide");
         var uid = localStorage.getItem("uid");
@@ -103,7 +102,7 @@
         if(data.auth == 'passed'){
             var card = document.getElementById("body");
             card.classList.remove("hide");
-            console.log(data.subscribers);
+            document.getElementById("subscriberCount").innerHTML = data.subscribers;
         } else {
             window.location="./welcome/";
         } 
