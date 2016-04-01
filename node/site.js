@@ -75,7 +75,7 @@ io.on('connection', function (socket) {
                     })
         }) 
         .then(function(result) {
-            socket.emit('authAdmin', {auth:'passed', subscribers:'result'}); 
+            socket.emit('authAdmin', {auth:'passed', subscribers:result}); 
         });
         } // End Else
     });
