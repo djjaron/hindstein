@@ -64,7 +64,8 @@ io.on('connection', function (socket) {
         if(isAdmin == false){
             socket.emit('authAdmin', {auth:'failed'}); 
         } else {
-            socket.emit('authAdmin', {auth:'passed'});   //   <<== SEND ALL DATA FOR ADMIN INTITAL STATE
+            var subscriberCount = countSubscribers();
+            socket.emit('authAdmin', {auth:'passed', subscribers:subscriberCount});   //   <<== SEND ALL DATA FOR ADMIN INTITAL STATE
         }
         
 
@@ -133,6 +134,15 @@ io.on('connection', function (socket) {
         }, function (errorObject) {
             return false;
         });
+    }
+    
+    //-- COUNT SUBSCRIBRS
+    function countSubscribers() {
+        var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/phoneNumbers/");
+            ref.once("value", function(snapshot) {
+            var count = snapshot.numChildren());
+            return count
+            });
     }
        
     //------------------- END ---------------------  

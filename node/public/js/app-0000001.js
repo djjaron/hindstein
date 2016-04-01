@@ -101,6 +101,7 @@
 //-- Auth Admin
   socket.on('authAdmin', function (data) {
         if(data.auth == 'passed'){
+            var card = document.getElementById("body");
             card.classList.remove("hide");
         } else {
             window.location="./welcome/";
