@@ -64,18 +64,20 @@ io.on('connection', function (socket) {
         if(isAdmin == false){
             socket.emit('authAdmin', {auth:'failed'}); 
         } else {
-            
-            
-            new Promise(function(resolve, reject) {
-                resolve(countSubscribers());
-            })
-            .then(function(result) {
-                console.log('A: '+result);
-                socket.emit('authAdmin', {auth:'passed', subscribers:result});
-            });
-            
-            
-        }
+        new Promise(function(resolve, reject) {
+             var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/phoneNumbers/");
+                myFirebaseRef.once("value", function(snapshot) {
+                    var subscribers = snapshot.numChildren();
+                    resolve(subscribers);
+                }, function (errorObject) {
+                    console.log("The read failed: " + errorObject.code);
+                    reject
+                    })
+        }) 
+        .then(function(result) {
+            socket.emit('authAdmin', {auth:'passed', subscribers:'result'}); 
+        });
+        } // End Else
     });
     
     //------------------- TWILLIO --------------------- 
@@ -143,16 +145,7 @@ io.on('connection', function (socket) {
         });
     }
     
-    //-- COUNT SUBSCRIBRS
-    function countSubscribers() {
-        var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/phoneNumbers/");
-        myFirebaseRef.once("value", function(snapshot) {
-        var subscriberCount = snapshot.numChildren();
-        console.log("B: "+subscriberCount);
-        return subscriberCount;
-        });
-        
-    }
+
        
     //------------------- END ---------------------  
 });
