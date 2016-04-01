@@ -68,8 +68,10 @@ io.on('connection', function (socket) {
 
             new Promise(function(resolve, reject) {
             // A mock async action using setTimeout
-             setTimeout(function() { resolve(10); }, 3000);
-            //resolve(countSubscribers());
+            // setTimeout(function() { resolve(10); }, 3000);
+            var count = countSubscribers();
+            console.log(count);
+            resolve(count);
             })
             .then(function(result) {
                 console.log('A: '+result);
