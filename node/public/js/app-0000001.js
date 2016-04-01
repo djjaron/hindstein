@@ -16,15 +16,20 @@
    var socket = io.connect('http://hindste.in');
 
 //---- Event Listeners
+    var loc = window.location.pathname;
+//-- HOME
+    if (loc ==''){
     document.getElementById("sendPhoneNumber").addEventListener("click", sendPhoneNumber);
     document.getElementById("phoneNumber").addEventListener("focus", addCountryCode);
     document.getElementById("number").addEventListener("click", focusPhoneNumber);
-//--Admin
-    document.getElementById("login").addEventListener("click", adminLogin);
-    
-    
     window.addEventListener("load", restylePhoneNumber);
     window.addEventListener("resize", restylePhoneNumber);
+    }
+//--Admin
+    if(loc =='/admin/'){
+    document.getElementById("login").addEventListener("click", adminLogin);
+    }
+
 
 //----- Functoins
     function sendPhoneNumber() {
