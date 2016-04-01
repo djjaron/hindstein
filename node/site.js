@@ -49,9 +49,11 @@ io.on('connection', function (socket) {
                 password : data.password
         }, function(error, authData) {
             if (error) {
+                 socket.emit('adminLogin', {login:failed});
                 console.log("Login Failed!", error);
             } else {
-                console.log("Authenticated successfully with payload:", authData);
+                socket.emit('adminLogin', {login:authData.uid});
+                console.log("Authenticated successfully with payload:", authData.uid);
             }
         });
 
