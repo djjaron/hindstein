@@ -82,19 +82,14 @@ io.on('connection', function (socket) {
     
     // Save Welcome SMS
     socket.on('saveWelcome', function (data){
-        var image = data.image;
-        var text = data.text;
-        console.log(text);
-        var uid = data.uid;
         var isAdmin = checkAdmin(data.uid);
         if (isAdmin == false){
             socket.emit('authAdmin', {auth:'failed'}); 
         } else {
             var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
                 myFirebaseRef.set({
-                        image: image,
-                        text: text,
-                        uid: uid
+                        image: data.image,
+                        text: data.text,
                 }, function(error){
                         if (error) {
                            console.log("Data could not be saved." + error);
@@ -111,8 +106,6 @@ io.on('connection', function (socket) {
         var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
           myFirebaseRef.once("value", function(snapshot) {
               var data = snapshot.val();
-                console.log(data.image);
-                console.log(data.text);
                 socket.emit('getWelcome', {image:data.image, text:data.text}); 
             }, function (errorObject) {
                 console.log("The read failed: " + errorObject.code);       

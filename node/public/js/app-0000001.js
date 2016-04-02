@@ -243,6 +243,12 @@
         }
   });
   
+  //-- Get Welcome
+  socket.on('getWelcome', function (data) {
+      document.getElementById("weclomeImage").src = data.image; 
+      document.getElementById("welcomeText").value = data.text;   
+  })
+  
 
  ///---------------------- END ------------------------     
 })();
