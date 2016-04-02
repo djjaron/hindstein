@@ -81,7 +81,7 @@ io.on('connection', function (socket) {
     });
     
     // Save Welcome SMS
-    socket.on('saveWelcome'), function (data){
+    socket.on('saveWelcome', function (data){
         var image = data.image;
         var text = data.text;
         var uid = data.uid;
@@ -105,7 +105,7 @@ io.on('connection', function (socket) {
                 });
            socket.emit('saveWelcome', {state:'saved'}); 
         }
-    }
+    });
     
     
     //------------------- TWILLIO --------------------- 
