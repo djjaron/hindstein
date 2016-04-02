@@ -80,6 +80,34 @@ io.on('connection', function (socket) {
         } // End Else
     });
     
+    // Save Welcome SMS
+    socket.on('saveWelcome'), function (data){
+        var image = data.image;
+        var text = data.text;
+        var uid = data.uid;
+        var isAdmin = checkAdmin(data.uid);
+        if (isAdmin == false){
+            socket.emit('authAdmin', {auth:'failed'}); 
+        } else {
+            var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/");
+                myFirebaseRef.set({
+                    welcomeSMS: {
+                        image: image,
+                        text: text,
+                        uid: uid
+                    }
+                }, function(error){
+                        if (error) {
+                           console.log("Data could not be saved." + error);
+                        } else {
+                            console.log("Data saved successfully.");
+                        }
+                });
+           socket.emit('saveWelcome', {state:'saved'}); 
+        }
+    }
+    
+    
     //------------------- TWILLIO --------------------- 
 
     function twillioSend(to, from, body, mediaUrl) {

@@ -183,6 +183,7 @@
         var text = document.getElementById("welcomeText");
         var uid = localStorage.getItem("uid");
         socket.emit('saveWelcome', { image:image, text:text, uid:uid });
+        document.getElementById("saveWelcome").value = "SAVING..."; 
     }
     
     function getWelcome(){
@@ -230,6 +231,16 @@
             window.location="./admin/home/";
         }
   });
+  
+  //-- Save Welcome
+    socket.on('saveWelcome', function (data) {
+        if(data.state =='failed'){
+            document.getElementById("saveWelcome").value = "SAVE WELCOME"; 
+        } else{
+            
+        }
+  });
+  
 
  ///---------------------- END ------------------------     
 })();
