@@ -90,13 +90,11 @@ io.on('connection', function (socket) {
         if (isAdmin == false){
             socket.emit('authAdmin', {auth:'failed'}); 
         } else {
-            var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/");
+            var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
                 myFirebaseRef.set({
-                    welcomeSMS: {
                         image: image,
                         text: text,
                         uid: uid
-                    }
                 }, function(error){
                         if (error) {
                            console.log("Data could not be saved." + error);
@@ -107,6 +105,20 @@ io.on('connection', function (socket) {
                 });
         }
     });
+    
+    // getWelcome
+    socket.on('getWelcome', function (data){
+        var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
+          myFirebaseRef.once("value", function(snapshot) {
+                console.log(snapshot);
+                console.log(snapshot.image);
+                console.log(snapshot.text);
+                socket.emit('getWelcome', {image:image, text:text}); 
+            }, function (errorObject) {
+                console.log("The read failed: " + errorObject.code);       
+            })
+        
+    }
     
     
     //------------------- TWILLIO --------------------- 
