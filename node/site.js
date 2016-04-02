@@ -118,7 +118,7 @@ io.on('connection', function (socket) {
                 console.log("The read failed: " + errorObject.code);       
             })
         
-    }
+    });
     
     
     //------------------- TWILLIO --------------------- 
