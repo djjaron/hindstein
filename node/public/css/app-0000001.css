@@ -251,3 +251,102 @@ html{
 .hide{
     display: none;
 }
+
+.adminHeader{
+    text-align: left;
+    color: white;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    display: inline-block;
+    width: 100%;
+    
+}
+
+.fullPage{
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
+.halfPage{
+    display:inline-block;
+    width: 100%;
+    max-width: 320px;
+    text-align:center;
+    
+}
+.dropZone{
+    width: 200px;
+    height: 200px;
+     outline: none;
+     display: block;
+     margin:0 auto;
+     margin-bottom: 15px;
+     position: relative;    
+}
+
+.smsImage{
+    border-radius: 6px;
+    width: 200px;
+    height: 200px;
+    background-color: #fff4cc;
+    border: 1px solid #c89e04; 
+    outline: none;
+    margin-bottom: 15px;
+    overflow: hidden;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.imageUpload{
+    background-color: red;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 200px;
+    height: 200px;
+    outline: none;
+    opacity: 0;
+    cursor: hand;
+    cursor: pointer;
+}
+
+.smsText{
+    border-radius: 6px;
+    width: 200px;
+    height: 100px;  
+    background-color: #fff4cc;
+    border: 1px solid #c89e04; 
+    outline: none;
+    font-size: 14px;
+    color: #5d4901;
+    padding: 10px;
+}
+
+.smsBtn{
+      border-radius: 6px;
+    width: 200px;
+    height: 40px;  
+    background-color: #fde488;
+    border: 1px solid #c89e04; 
+    outline: none;
+    font-size: 12px;
+    color: #5d4901;
+    padding: 10px;
+    margin-top: 15px;
+    margin-bottom: 35px; 
+    font-weight: bold;  
+}
+
+.mobileAdmin{
+    height: 875px;
+    max-height: 875px;
+    transform: translateY(-35%);
+    margin-bottom: 40px;
+
+}

@@ -32,6 +32,12 @@
 //--Admin Home
     if(loc =='/admin/home/'){
     authAdmin();
+    window.addEventListener("load", restyleAdmin);
+    window.addEventListener("resize", restyleAdmin);
+    document.getElementById("saveWelcome").addEventListener("click", saveWelcome);
+    document.getElementById("saveWelcome").addEventListener("click", sendMessage);
+    document.getElementById("welcomeUpload").addEventListener("change", welcomeUpload);
+    document.getElementById("messageUpload").addEventListener("change", messageUpload);
     }
 
 
@@ -92,7 +98,108 @@
         } else{
         socket.emit('authAdmin', { uid:uid });
         };
+    }
+    
+    function restyleAdmin(){
+        console.log('resize');
+        var width = window.innerWidth;
+        if(width < 716){
+            console.log('resize under 400');
+            card.classList.add('mobileAdmin');
+        }else{
+            console.log('resize over 400');
+            card.classList.remove('mobileAdmin');
+        }  
+    }
+    
+ 
+         //---------------------- IMAGE RESIZE -----------------------//
+  
+    function imageResize(Width, Height, files, outputId) {
+            
+                var wantedWidth = Width;
+                var wantedHeight = Height;
+                var selectedFile = files[0];
 
+                File.prototype.convertToBase64 = function(callback) {
+                    var reader = new FileReader();
+                reader.onload = function(e) {
+                    callback(e.target.result);
+                };
+                reader.readAsDataURL(this);
+            };
+
+            selectedFile.convertToBase64(function(base64) {
+                var img = document.createElement('img');
+                img.src = base64;
+                
+  //----- SIZE THEY GAVE US
+    
+                img.onload = function() {
+                   var givenWidth = img.naturalWidth;
+                   var givenHeight = img.naturalHeight;
+                   
+  //----- CALCULATE THE RESIZE & CENTER
+                   
+                    var PercentA = givenWidth / wantedWidth;
+                    var TestA = givenHeight / PercentA;
+
+            if ( TestA > wantedHeight ){
+                    var resizeWidth = givenWidth / PercentA;
+                    var resizeHeight = givenHeight / PercentA; 
+            } else {
+                    var PercentB = givenHeight / wantedHeight; 
+                    var resizeWidth = givenWidth / PercentB;
+                    var resizeHeight = givenHeight / PercentB; 
+            }
+                    var centerWidth = 0 - ((resizeWidth - wantedWidth) /2);
+                    var centerHeight = 0 - ((resizeHeight - wantedHeight) /2);
+                    
+ //----- PAINT THE CANVAS
+                        
+                    // improve final qulaity with progressive downsampling
+                    // Clauculate the number of samples to reduce by 50% for each sample, from original to target   
+                                
+                    var canvas = document.createElement('canvas');
+                    var ctx = canvas.getContext('2d');
+                    canvas.width = Width;
+                    canvas.height = Height;
+                    ctx.drawImage(this, centerWidth, centerHeight, resizeWidth, resizeHeight);
+                    document.getElementById(outputId).src = canvas.toDataURL();
+                    
+                    
+                };
+            });
+        }; // END image resize
+    
+    
+    function welcomeUpload(){
+        var image = document.getElementById("welcomeUpload").files;
+        var imageResized = imageResize(400, 400, image, 'weclomeImage')
+    }
+    
+    function saveWelcome(){
+        var image = document.getElementById("weclomeImage").src;
+        var text = document.getElementById("welcomeText");
+        var uid = localStorage.getItem("uid");
+        socket.emit('saveWelcome', { image:image, text:text, uid:uid });
+    }
+    
+    function getWelcome(){
+         socket.emit('getWelcome', { uid:uid });
+    }
+    
+    function messageUpload(){
+        var image = document.getElementById("messageUpload").files;
+        var imageResized = imageResize(400, 400, image, 'messageImage')
+    }
+    
+    function sendMessage(){
+        
+    }
+    
+    function getMessage(){
+        
     }
     
 //----- Incoming Socket
