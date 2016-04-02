@@ -180,7 +180,7 @@
     
     function saveWelcome(){
         var image = document.getElementById("weclomeImage").src;
-        var text = document.getElementById("welcomeText");
+        var text = document.getElementById("welcomeText").value;
         var uid = localStorage.getItem("uid");
         socket.emit('saveWelcome', { image:image, text:text, uid:uid });
         document.getElementById("saveWelcome").value = "SAVING..."; 
@@ -234,7 +234,7 @@
   
   //-- Save Welcome
     socket.on('saveWelcome', function (data) {
-        if(data.state =='failed'){
+        if(data.state =='saved'){
             document.getElementById("saveWelcome").value = "SAVE WELCOME"; 
         } else{
             

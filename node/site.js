@@ -84,6 +84,7 @@ io.on('connection', function (socket) {
     socket.on('saveWelcome', function (data){
         var image = data.image;
         var text = data.text;
+        console.log(text);
         var uid = data.uid;
         var isAdmin = checkAdmin(data.uid);
         if (isAdmin == false){
@@ -101,9 +102,9 @@ io.on('connection', function (socket) {
                            console.log("Data could not be saved." + error);
                         } else {
                             console.log("Data saved successfully.");
+                            socket.emit('saveWelcome', {state:'saved'}); 
                         }
                 });
-           socket.emit('saveWelcome', {state:'saved'}); 
         }
     });
     
@@ -166,7 +167,6 @@ io.on('connection', function (socket) {
     function checkAdmin(uid) {
         var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/admin/" + uid);
         myFirebaseRef.once("value", function(snapshot) {
-            console.log(snapshot.val());
             return true;
         }, function (errorObject) {
             return false;
