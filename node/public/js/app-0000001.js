@@ -33,6 +33,7 @@
     if(loc =='/admin/home/'){
     authAdmin();
     window.addEventListener("load", restyleAdmin);
+    window.addEventListener("load", getWelcome);
     window.addEventListener("resize", restyleAdmin);
     document.getElementById("saveWelcome").addEventListener("click", saveWelcome);
     document.getElementById("saveWelcome").addEventListener("click", sendMessage);
@@ -187,6 +188,7 @@
     }
     
     function getWelcome(){
+         var uid = localStorage.getItem("uid");
          socket.emit('getWelcome', { uid:uid });
     }
     

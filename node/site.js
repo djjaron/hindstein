@@ -110,10 +110,10 @@ io.on('connection', function (socket) {
     socket.on('getWelcome', function (data){
         var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
           myFirebaseRef.once("value", function(snapshot) {
-                console.log(snapshot);
-                console.log(snapshot.image);
-                console.log(snapshot.text);
-                socket.emit('getWelcome', {image:image, text:text}); 
+              var data = snapshot.val();
+                console.log(data.image);
+                console.log(data.text);
+                socket.emit('getWelcome', {image:data.image, text:data.text}); 
             }, function (errorObject) {
                 console.log("The read failed: " + errorObject.code);       
             })
