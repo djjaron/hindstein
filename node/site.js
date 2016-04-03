@@ -59,7 +59,7 @@ io.on('connection', function (socket) {
         }) 
         .then(function(result) {
             // console.log('Sending: '+ result.val()); 
-             twillioSend("+14243747066",  "+17027488799", 'Test02', "https://s3-us-west-2.amazonaws.com/img.hindste.in/welcome.jpg")
+             twillioSend("+14243747066",  "+17027488799", 'Test02', "https://s3-us-west-2.amazonaws.com/img.hindste.in/welcome.png")
              
         });        
     });
@@ -110,7 +110,7 @@ io.on('connection', function (socket) {
         if (isAdmin == false){
             socket.emit('authAdmin', {auth:'failed'}); 
         } else {
-            base64S3(data.image, 'welcome.jpg');
+            base64S3(data.image, 'welcome.png');
             var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
                 myFirebaseRef.set({
                         text: data.text,

@@ -250,7 +250,7 @@
             var d = new Date();
             var n = d.getTime();
             document.getElementById("saveWelcome").value = "SAVE WELCOME"; 
-            document.getElementById("weclomeImage").src = 'http://img.hindste.in/welcome.jpg?id='+n;  
+            document.getElementById("weclomeImage").src = 'http://img.hindste.in/welcome.png?id='+n;  
         } else{
             
         }
@@ -260,7 +260,7 @@
   socket.on('getWelcome', function (data) {
             var d = new Date();
             var n = d.getTime();
-      document.getElementById("weclomeImage").src = 'http://img.hindste.in/welcome.jpg?id='+n; 
+      document.getElementById("weclomeImage").src = 'http://img.hindste.in/welcome.png?id='+n; 
       document.getElementById("welcomeText").value = data.text;   
   })
   
