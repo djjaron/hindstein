@@ -58,11 +58,9 @@ io.on('connection', function (socket) {
                     })
         }) 
         .then(function(result) {
-             console.log('Sending: '+ result);
+             console.log('Sending: '+ result); 
+             twillioSend("+14243747066",  "+17027488799", message, "http://img.hindste.in/welcome.jpg")
              
-twillioSend("+14243747066",  "+17027488799", "Test Twillio88", "https://www.enterprise.com/content/dam/global-vehicle-images/cars/FORD_FOCU_2012-1.png")
-             
-         //  twillioSend(data.phoneNumber, '+17027488799', 'testing website 1', 'https://www.enterprise.com/content/dam/global-vehicle-images/cars/FORD_FOCU_2012-1.png');
         });        
     });
     
