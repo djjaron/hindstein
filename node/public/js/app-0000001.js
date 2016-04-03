@@ -203,8 +203,8 @@
     }
     
     function sendMessage(){
-        var image = document.getElementById("").src;
-        var text = document.getElementById("").value;
+        var image = document.getElementById("messageImage").src;
+        var text = document.getElementById("messageText").value;
         var uid = localStorage.getItem("uid");
         socket.emit('sendSMS',{ image:image, text:text, uid:uid});
         document.getElementById("sendMessage").value = "SENDING...";
