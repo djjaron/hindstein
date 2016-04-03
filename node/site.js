@@ -184,8 +184,7 @@ io.on('connection', function (socket) {
     //------------------- AWS --------------------------
     
     function base64S3(image, name){
-        console.log(image);
-        buf = new Buffer(image.replace(/^data:image\/\w+;base64,/, ""),'base64')
+        var buf = new Buffer(image,'base64')
         var data = {
             Key: name, 
             Body: buf,
