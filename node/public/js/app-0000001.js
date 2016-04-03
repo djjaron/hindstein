@@ -198,11 +198,16 @@
     }
     
     function sendMessage(){
-        
+        var image = document.getElementById("").src;
+        var text = document.getElementById("").value;
+        var uid = localStorage.getItem("uid");
+        socket.emit('sendSMS',{ image:image, text:text, uid:uid});
+        document.getElementById("sendMessage").value = "SENDING...";
     }
     
     function getMessage(){
-        
+        var uid = localStorage.getItem("uid");
+        socket.emit('getMessage',{uid:uid});
     }
     
 //----- Incoming Socket
@@ -247,6 +252,13 @@
   socket.on('getWelcome', function (data) {
       document.getElementById("weclomeImage").src = data.image; 
       document.getElementById("welcomeText").value = data.text;   
+  })
+  
+  //-- Send Message
+  socket.on('sendMessage', function (data) {
+      if(data.state =='complete'){
+          document.getElementById("sendMessage").value = "SEND MESSAGE";    
+      }
   })
   
 

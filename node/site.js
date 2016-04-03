@@ -113,7 +113,31 @@ io.on('connection', function (socket) {
         
     });
     
+    // sendMessage
+    socket.on('sendMessage', function(data){
+        var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/phoneNumbers/");
+            myFirebaseRef.once("value", function(snapshot) {
+            // Start Loop
+                snapshot.forEach(function(childSnapshot) {
+                    var to = childSnapshot.val(); // Check this is a number
+                console.log(to); // Delete once checked
+                    var from = '+1 424-231-2986'; // This needs to be stored as a global variable
+                    var body = data.body;
+                    var mediaUrl = data.image /// TODO This needs to come from S3 Bucket!!
+                    twillioSend(to, from, body, mediaUrl);
+                });
+            // End Loop
+                socket.emit('sendMessage', {state:'complete'}); 
+                }, function (errorObject) {
+                    console.log("The read failed: " + errorObject.code);
+                })
+    });
     
+    /// SHOULD WE STOP ANOTHER MESSAGE BEING SENT TODAY?
+    /// SHOULD WE SEND A TEST TO ADMIN BEFORE SENDING TO SIBSCRIBERS?
+    
+    
+      
     //------------------- TWILLIO --------------------- 
 
     function twillioSend(to, from, body, mediaUrl) {
