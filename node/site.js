@@ -60,7 +60,7 @@ io.on('connection', function (socket) {
         .then(function(result) {
              console.log('Sending: '+ result);
              
-twillioSend();
+twillioSend("+14243747066",  "+17027488799", "Test Twillio77")
              
          //  twillioSend(data.phoneNumber, '+17027488799', 'testing website 1', 'https://www.enterprise.com/content/dam/global-vehicle-images/cars/FORD_FOCU_2012-1.png');
         });        
@@ -166,15 +166,12 @@ twillioSend();
       
     //------------------- TWILLIO --------------------- 
 
-    function twillioSend(to, from, body, mediaUrl) {
-        
-        
-        
-        
+    function twillioSend(to, sentFrom, body, mediaUrl) {
+                
         client.messages.create({ 
-            to: "+14243747066", 
-            from: "+17027488799", 
-            body: "Test Twillio66",   
+            to: to, 
+            from: sentFrom, 
+            body: body,   
         }, function(err, message) { 
             console.log(message.sid); 
         });
