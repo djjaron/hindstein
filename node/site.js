@@ -50,7 +50,7 @@ io.on('connection', function (socket) {
              var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
                 myFirebaseRef.once("value", function(snapshot) {
                     var message = snapshot.val();
-                    var cleanMessage - message.text; 
+                    var cleanMessage = message.text; 
                     var messageToSend = {message:cleanMessage, to:'+14243747066'};
                     resolve(messageToSend);
                 }, function (errorObject) {
