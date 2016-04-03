@@ -40,7 +40,7 @@
     window.addEventListener("load", getWelcome);
     window.addEventListener("resize", restyleAdmin);
     document.getElementById("saveWelcome").addEventListener("click", saveWelcome);
-    document.getElementById("saveWelcome").addEventListener("click", sendMessage);
+    document.getElementById("sendMessage").addEventListener("click", sendMessage);
     document.getElementById("welcomeUpload").addEventListener("change", welcomeUpload);
     document.getElementById("messageUpload").addEventListener("change", messageUpload);
     }
