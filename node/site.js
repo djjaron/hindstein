@@ -177,7 +177,6 @@ io.on('connection', function (socket) {
             body: body, 
             mediaUrl: mediaUrl,  
         }, function(err, message) { 
-            console.log(message.sid); 
             if (err) {
                 console.log('------ ERROR ------');
                 console.log(err);
