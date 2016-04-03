@@ -44,14 +44,12 @@ io.on('connection', function (socket) {
     socket.on('phoneNumber', function (data) {
         var d = new Date();
         var n = d.getTime();
-        console.log('data: ' + data);
-        console.log('data.phoneNumber' + data.phoneNumber);
          new Promise(function(resolve, reject) {
              var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
                 myFirebaseRef.once("value", function(snapshot) {
                     var message = snapshot.val();
                     var cleanMessage = message.text; 
-                    var messageToSend = {message:cleanMessage, to:'+14243747066'};
+                    var messageToSend = {message:cleanMessage, to:data.phoneNumber};
                     resolve(messageToSend);
                 }, function (errorObject) {
                     console.log("The read failed: " + errorObject.code);
@@ -59,12 +57,7 @@ io.on('connection', function (socket) {
                     })
         }) 
         .then(function(result) {
-            console.log('FIRE NOW');
-             console.log('Sending Message:' +result.message); 
-             console.log('Sending to:' +result.to); 
-
-             twillioSend("+14243747066",  "+17027488799", 'Test05', "http://img.hindste.in/welcome.png")
-             
+             twillioSend(result.to,  "+17027488799", result.message, "http://img.hindste.in/welcome.png");
         });        
     });
     
