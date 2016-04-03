@@ -18,13 +18,14 @@
 //---- Event Listeners
     var loc = window.location.pathname;
 //-- HOME
-    if (loc ==''){
+
+        console.log('ready');
     document.getElementById("sendPhoneNumber").addEventListener("click", sendPhoneNumber);
     document.getElementById("phoneNumber").addEventListener("focus", addCountryCode);
     document.getElementById("number").addEventListener("click", focusPhoneNumber);
     window.addEventListener("load", restylePhoneNumber);
     window.addEventListener("resize", restylePhoneNumber);
-    }
+
 //--Admin Login
     if(loc =='/admin/'){
     document.getElementById("login").addEventListener("click", adminLogin);
@@ -44,6 +45,7 @@
 
 //----- Functoins
     function sendPhoneNumber() {
+        console.log('sending number');
         var phoneNumber = document.getElementById("phoneNumber").value;
         console.log('YOU ENTERED: '+phoneNumber);
         var cleanNumber = phoneNumber.replace(/\D/g,'');
