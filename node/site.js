@@ -40,10 +40,28 @@ io.on('connection', function (socket) {
     //------------------- SOCKETS ---------------------  
     // Welcome Message
     socket.on('phoneNumber', function (data) {
+        var d = new Date();
+        var n = d.getTime();
         console.log('data: ' + data);
         console.log('data.phoneNumber' + data.phoneNumber);
-        twillioSend(data.phoneNumber, '+1 424-231-2986', 'Welcome to Hindstein!', 'http://www.hindste.in/img/uploads/000000000001.gif');
+         new Promise(function(resolve, reject) {
+             var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
+                myFirebaseRef.once("value", function(snapshot) {
+                    var message = snapshot.val().text;
+                    consoile.log(message);
+                    resolve(message);
+                }, function (errorObject) {
+                    console.log("The read failed: " + errorObject.code);
+                    reject
+                    })
+        }) 
+        .then(function(result) {
+             consoile.log(result);
+           twillioSend(data.phoneNumber, '+1 424-231-2986', result, 'http://img.hindste.in/welcome.jpg?id='+n);
+        });        
     });
+    
+    
     // Admin Login
       socket.on('adminLogin', function (data) {           
         var ref = new Firebase("https://hindstein.firebaseio.com");
