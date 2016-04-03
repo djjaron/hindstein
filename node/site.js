@@ -59,7 +59,7 @@ io.on('connection', function (socket) {
         }) 
         .then(function(result) {
             // console.log('Sending: '+ result.val()); 
-             twillioSend("+14243747066",  "+17027488799", 'Test02', "https://s3-us-west-2.amazonaws.com/img.hindste.in/welcome.png")
+             twillioSend("+14243747066",  "+17027488799", 'Test02', "https://www.enterprise.com/content/dam/global-vehicle-images/cars/FORD_FOCU_2012-1.png")
              
         });        
     });
