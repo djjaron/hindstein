@@ -18,7 +18,7 @@ var express = require('express'),
     uuid = require('uuid-js');
     var AWS = require('aws-sdk');
     AWS.config.loadFromPath('./s3_config.json');
-    var s3Bucket = new AWS.S3( { params: {Bucket: 'hindstein'} } );
+    var s3Bucket = new AWS.S3( { params: {Bucket: 'img.hindste.in'} } );
 
 // allow access to all public files
 app.use(express.static(__dirname + '/public'));
@@ -89,19 +89,15 @@ io.on('connection', function (socket) {
         if (isAdmin == false){
             socket.emit('authAdmin', {auth:'failed'}); 
         } else {
-            var d = new Date();
-            var name = d.getTime();
-            base64S3(data.image, name);
-            
+            base64S3(data.image, 'welcome.jpg');
             var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
                 myFirebaseRef.set({
-                        image: name,
                         text: data.text,
                 }, function(error){
                         if (error) {
                            console.log("Data could not be saved." + error);
                         } else {
-                            console.log("Data saved successfully.");
+                            console.log("Data saved to Firebase successfully.");
                             socket.emit('saveWelcome', {state:'saved'}); 
                         }
                 });
@@ -184,13 +180,12 @@ io.on('connection', function (socket) {
     //------------------- AWS --------------------------
     
     function base64S3(image, name){
-        var fileName = name.toString() 
         var buf = new Buffer(image.replace(/^data:image\/\w+;base64,/, ""),'base64')
         var data = {
-            Key: fileName+'.jpg', 
+            Key: name, 
             Body: buf,
             ContentEncoding: 'base64',
-            ContentType: 'image/jpeg' /// IS IT A JPG ?????
+            ContentType: 'image/jpeg'
         };
   
             s3Bucket.putObject(data, function(err, data){

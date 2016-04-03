@@ -250,7 +250,7 @@
   
   //-- Get Welcome
   socket.on('getWelcome', function (data) {
-      document.getElementById("weclomeImage").src = data.image; 
+      document.getElementById("weclomeImage").src = 'https://s3-us-west-2.amazonaws.com/img.hindste.in/welcome.jpg'; 
       document.getElementById("welcomeText").value = data.text;   
   })
   
