@@ -151,12 +151,8 @@ io.on('connection', function (socket) {
             myFirebaseRef.once("value", function(snapshot) {
             // Start Loop
                 snapshot.forEach(function(childSnapshot) {
-                    
-                    console.log(childSnapshot.val().phone_number);
-                    
-                    //var to = '+'+childSnapshot.val(); // Check this is a number
-                    // console.log('+'+to); // Delete once checked
-                    // twillioSend(to, '+17027488799', data.text, data.image);
+                    var sendTo = (childSnapshot.val().phone_number);
+                     twillioSend(sendTo, '+17027488799', data.text, data.image);
                 });
             // End Loop
                 socket.emit('sendMessage', {state:'complete'}); 
