@@ -152,8 +152,7 @@ io.on('connection', function (socket) {
             // Start Loop
                 snapshot.forEach(function(childSnapshot) {
                     
-                    console.log(childSnapshot);
-                    console.log(childSnapshot.val());
+                    console.log(childSnapshot.val().phone_number);
                     
                     //var to = '+'+childSnapshot.val(); // Check this is a number
                     // console.log('+'+to); // Delete once checked
