@@ -17,7 +17,6 @@
 
 //---- Event Listeners
     var loc = window.location.pathname;
-    console.log(loc); 
 //-- HOME
 
     if (loc =='/' ){      
@@ -29,12 +28,10 @@
     }
 //--Admin Login
     if(loc =='/admin/'){
-          console.log(loc);   
     document.getElementById("login").addEventListener("click", adminLogin);
     }
 //--Admin Home
-    if(loc =='/admin/home/'){
-          console.log(loc);   
+    if(loc =='/admin/home/'){  
     authAdmin();
     window.addEventListener("load", restyleAdmin);
     window.addEventListener("load", getWelcome);
@@ -48,9 +45,7 @@
 
 //----- Functoins
     function sendPhoneNumber() {
-        console.log('sending number');
         var phoneNumber = document.getElementById("phoneNumber").value;
-        console.log('YOU ENTERED: '+phoneNumber);
         var cleanNumber = phoneNumber.replace(/\D/g,'');
         var raw_number = cleanNumber.replace(/[^0-9]/g, '');
         var regex1 = /^1?([2-9]..)([2-9]..)(....)$/;
@@ -59,7 +54,6 @@
         } else {
             var formatted_number = cleanNumber.replace(regex1, '1 ($1) $2 $3');
             var readyNumber = formatted_number.replace(/\D/g,'');
-            console.log('We SENT: +'+readyNumber);
             socket.emit('phoneNumber', { phoneNumber: '+'+readyNumber});
              document.getElementById("number").style.opacity = "0";
         }   
@@ -107,13 +101,10 @@
     }
     
     function restyleAdmin(){
-        console.log('resize');
         var width = window.innerWidth;
         if(width < 716){
-            console.log('resize under 400');
             card.classList.add('mobileAdmin');
         }else{
-            console.log('resize over 400');
             card.classList.remove('mobileAdmin');
         }  
     }
@@ -206,8 +197,9 @@
         var image = document.getElementById("messageImage").src;
         var text = document.getElementById("messageText").value;
         var uid = localStorage.getItem("uid");
-        socket.emit('sendSMS',{ image:image, text:text, uid:uid});
+        socket.emit('sendMessage',{ image:image, text:text, uid:uid});
         document.getElementById("sendMessage").value = "SENDING...";
+        console.log('Send Mesage');
     }
     
     function getMessage(){
