@@ -51,7 +51,7 @@ io.on('connection', function (socket) {
                 myFirebaseRef.once("value", function(snapshot) {
                     var message = snapshot.val(); 
                     var messageToSend = message.text;
-                    resolve(message);
+                    resolve(messageToSend);
                 }, function (errorObject) {
                     console.log("The read failed: " + errorObject.code);
                     reject
@@ -59,8 +59,8 @@ io.on('connection', function (socket) {
         }) 
         .then(function(result) {
             console.log('FIRE NOW');
-             console.log('Sending Message:' +result.messageToSend); 
-             console.log('Sending To:' + result.data.phoneNumber); 
+             console.log('Sending Message:' +result); 
+
              twillioSend("+14243747066",  "+17027488799", 'Test04', "http://img.hindste.in/welcome.png")
              
         });        
