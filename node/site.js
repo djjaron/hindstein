@@ -15,8 +15,8 @@ var express = require('express'),
     authToken = '48e9253927058f8421e9a47aaac4c6fe',
     client = require('twilio')(accountSid, authToken),
     Firebase = require('firebase'),
-    uuid = require('uuid-js');
-    var AWS = require('aws-sdk');
+    uuid = require('uuid-js'),
+    AWS = require('aws-sdk');
     AWS.config.loadFromPath('./s3_config.json');
     var s3Bucket = new AWS.S3( { params: {Bucket: 'img.hindste.in'} } );
 
@@ -57,7 +57,7 @@ io.on('connection', function (socket) {
         }) 
         .then(function(result) {
              console.log('Sending: '+ result);
-           twillioSend(data.phoneNumber, '+1 424-231-2986', 'testing', 'http://img.hindste.in/welcome.jpg?id='+n);
+           twillioSend('+1'+data.phoneNumber, '+1 424-231-2986', 'testing', 'http://img.hindste.in/welcome.jpg?id='+n);
         });        
     });
     
