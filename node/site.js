@@ -19,6 +19,8 @@ var express = require('express'),
     AWS = require('aws-sdk');
     AWS.config.loadFromPath('./s3_config.json');
     var s3Bucket = new AWS.S3( { params: {Bucket: 'img.hindste.in'} } );
+    
+    
 
 // allow access to all public files
 app.use(express.static(__dirname + '/public'));
@@ -57,7 +59,16 @@ io.on('connection', function (socket) {
         }) 
         .then(function(result) {
              console.log('Sending: '+ result);
-           twillioSend(data.phoneNumber, '+17027488799', 'testing website 1', 'https://www.enterprise.com/content/dam/global-vehicle-images/cars/FORD_FOCU_2012-1.png');
+             
+             client.messages.create({ 
+	to: "+14243747066", 
+	from: "+17027488799", 
+	body: "Test Twillio",   
+}, function(err, message) { 
+	console.log(message.sid); 
+});
+             
+         //  twillioSend(data.phoneNumber, '+17027488799', 'testing website 1', 'https://www.enterprise.com/content/dam/global-vehicle-images/cars/FORD_FOCU_2012-1.png');
         });        
     });
     
