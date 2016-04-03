@@ -58,8 +58,8 @@ io.on('connection', function (socket) {
                     })
         }) 
         .then(function(result) {
-             console.log('Sending: '+ result); 
-             twillioSend("+14243747066",  "+17027488799", message, "http://img.hindste.in/welcome.jpg")
+             console.log('Sending: '+ result.val()); 
+             twillioSend("+14243747066",  "+17027488799", 'Test01', "http://img.hindste.in/welcome.jpg")
              
         });        
     });
