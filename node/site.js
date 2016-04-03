@@ -186,7 +186,7 @@ io.on('connection', function (socket) {
     function base64S3(image, name){
         var buf = new Buffer(image,'base64')
         var data = {
-            Key: name, 
+            Key: name.toString(), 
             Body: buf,
             ContentEncoding: 'base64',
             ContentType: 'image/jpeg' /// IS IT A JPG ?????
