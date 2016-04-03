@@ -184,9 +184,10 @@ io.on('connection', function (socket) {
     //------------------- AWS --------------------------
     
     function base64S3(image, name){
-        var buf = new Buffer(image,'base64')
+        var fileName = name.toString() 
+        var buf = new Buffer(image.replace(/^data:image\/\w+;base64,/, ""),'base64')
         var data = {
-            Key: name.toString(), 
+            Key: fileName+'.jpg', 
             Body: buf,
             ContentEncoding: 'base64',
             ContentType: 'image/jpeg' /// IS IT A JPG ?????
