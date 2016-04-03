@@ -91,7 +91,7 @@ io.on('connection', function (socket) {
         } else {
             var d = new Date();
             var name = d.getTime();
-          //  base64S3(data.image, name);
+            base64S3(data.image, name);
             
             var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
                 myFirebaseRef.set({
