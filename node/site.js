@@ -147,13 +147,19 @@ io.on('connection', function (socket) {
     
     // sendMessage
     socket.on('sendMessage', function(data){
+        
+                 // make a unique id
+            var myID = makeID();
+            console.log(myID);
+           // Save base 64 image file to amazon s3 with the id
+            base64S3(data.image, myID, 'png')
+        
+        
         var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/phoneNumbers/");
             myFirebaseRef.once("value", function(snapshot) {
             
-            // make a unique id
-            myID = makeID();
-            // Save base 64 image file to amazon s3 with the id
-            base64S3(data.image, myID, 'png')
+   
+         
             // use the id to save the text to the databse with a date
             // use the image and text to send out the text   
                 
