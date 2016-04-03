@@ -16,6 +16,9 @@ var express = require('express'),
     client = require('twilio')(accountSid, authToken),
     Firebase = require('firebase'),
     uuid = require('uuid-js');
+    var AWS = require('aws-sdk');
+    AWS.config.loadFromPath('./s3_config.json');
+    var s3Bucket = new AWS.S3( { params: {Bucket: 'hindstein'} } );
 
 // allow access to all public files
 app.use(express.static(__dirname + '/public'));
@@ -86,9 +89,13 @@ io.on('connection', function (socket) {
         if (isAdmin == false){
             socket.emit('authAdmin', {auth:'failed'}); 
         } else {
+            var d = new Date();
+            var name = d.getTime();
+          //  base64S3(data.image, name);
+            
             var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
                 myFirebaseRef.set({
-                        image: data.image,
+                        image: name,
                         text: data.text,
                 }, function(error){
                         if (error) {
@@ -172,6 +179,30 @@ io.on('connection', function (socket) {
     function makeID() {
         return uuid.create().toString();
     }
+    
+    
+    //------------------- AWS --------------------------
+    
+    function base64S3(image, name){
+        buf = new Buffer(req.body.imageBinary.replace(/^data:image\/\w+;base64,/, ""),'base64')
+        var data = {
+            Key: name, 
+            Body: buf,
+            ContentEncoding: 'base64',
+            ContentType: 'image/jpeg' /// IS IT A JPG ?????
+        };
+  
+            s3Bucket.putObject(data, function(err, data){
+                if (err) { 
+                console.log(err);
+                console.log('Error uploading data: ', data); 
+                } else {
+                console.log('succesfully uploaded the image!');
+            }
+        }); 
+    }
+    
+
   
     //------------------- FIREBASE --------------------- 
     
