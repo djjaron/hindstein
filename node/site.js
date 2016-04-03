@@ -201,8 +201,8 @@ io.on('connection', function (socket) {
         var data = {
             Key: name, 
             Body: buf,
-            ContentEncoding: 'base64',
-            ContentType: 'image/jpeg'
+          //  ContentEncoding: 'base64',
+            ContentType: 'image/png'
         };
   
             s3Bucket.putObject(data, function(err, data){
