@@ -57,7 +57,7 @@ io.on('connection', function (socket) {
         }) 
         .then(function(result) {
              console.log('Sending: '+ result);
-           twillioSend(data.phoneNumber, '+1 424-231-2986', 'testing', 'http://img.hindste.in/welcome.jpg');
+           twillioSend(data.phoneNumber, '+17027488799', 'testing website 1', 'http://img.hindste.in/welcome.jpg');
         });        
     });
     
