@@ -147,30 +147,19 @@ io.on('connection', function (socket) {
     
     // sendMessage
     socket.on('sendMessage', function(data){
-        
-                 // make a unique id
             var myID = makeID();
             console.log(myID);
-           // Save base 64 image file to amazon s3 with the id
-            base64S3(data.image, myID, 'png')
-        
+            base64S3(data.image, myID+'.png', 'png');
+            // use the id to save the text to the databse with a date
         
         var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/phoneNumbers/");
             myFirebaseRef.once("value", function(snapshot) {
-            
-   
-         
-            // use the id to save the text to the databse with a date
-            // use the image and text to send out the text   
-                
-                
             // Start Loop
-                // snapshot.forEach(function(childSnapshot) {
-                //     var sendTo = (childSnapshot.val().phone_number);
-                //      twillioSend(sendTo, '+17027488799', data.text, data.image);
-                // });
+                snapshot.forEach(function(childSnapshot) {
+                    var sendTo = (childSnapshot.val().phone_number);
+                     twillioSend(sendTo, '+17027488799', data.text, 'http://img.hindste.in/'+myID+'.png');
+                });
             // End Loop
-            
                 socket.emit('sendMessage', {state:'complete'}); 
                 }, function (errorObject) {
                     console.log("The read failed: " + errorObject.code);
