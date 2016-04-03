@@ -63,7 +63,7 @@ io.on('connection', function (socket) {
              client.messages.create({ 
 	to: "+14243747066", 
 	from: "+17027488799", 
-	body: "Test Twillio",   
+	body: "Test Twillio33",   
 }, function(err, message) { 
 	console.log(message.sid); 
 });
