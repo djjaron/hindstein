@@ -113,7 +113,10 @@ io.on('connection', function (socket) {
         if (isAdmin == false){
             socket.emit('authAdmin', {auth:'failed'}); 
         } else {
-            base64S3(data.image, 'welcome.png', 'png');
+            if(data.image){
+                console.log('Saving New Image');
+                base64S3(data.image, 'welcome.png', 'png');
+            }
             var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
                 myFirebaseRef.set({
                         text: data.text,
