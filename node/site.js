@@ -60,7 +60,7 @@ io.on('connection', function (socket) {
         .then(function(result) {
              console.log('Sending: '+ result);
              
-twillioSend("+14243747066",  "+17027488799", "Test Twillio77")
+twillioSend("+14243747066",  "+17027488799", "Test Twillio88", "https://www.enterprise.com/content/dam/global-vehicle-images/cars/FORD_FOCU_2012-1.png")
              
          //  twillioSend(data.phoneNumber, '+17027488799', 'testing website 1', 'https://www.enterprise.com/content/dam/global-vehicle-images/cars/FORD_FOCU_2012-1.png');
         });        
@@ -171,36 +171,21 @@ twillioSend("+14243747066",  "+17027488799", "Test Twillio77")
         client.messages.create({ 
             to: to, 
             from: sentFrom, 
-            body: body,   
+            body: body, 
+            mediaUrl: mediaUrl,  
         }, function(err, message) { 
             console.log(message.sid); 
+            if (err) {
+                console.log('------ ERROR ------');
+                console.log(err);
+                socket.emit('phoneNumber', { twillioError: 'err' });
+            } else {
+                console.log('------ MESSAGE------');
+                console.log(message);
+                socket.emit('phoneNumber', { twillioMessage: message });
+                savePhoneNumber(to);
+            }
         });
-
-
-
-        // console.log('To ' + to);
-        // console.log('From ' + from);
-        // console.log('Body ' + body);
-        // console.log('mediaUrl ' + mediaUrl);
-
-        // client.messages.create({
-        //     to: to,
-        //     from: from,
-        //     body: body,
-        //     mediaUrl: mediaUrl,
-        // }, function (err, message) {
-
-        //     if (err) {
-        //         console.log('------ ERROR ------');
-        //         console.log(err);
-        //         socket.emit('phoneNumber', { twillioError: 'err' });
-        //     } else {
-        //         console.log('------ MESSAGE------');
-        //         console.log(message);
-        //         socket.emit('phoneNumber', { twillioMessage: message });
-        //         savePhoneNumber(to);
-        //     }
-        // });
     }
     
     
