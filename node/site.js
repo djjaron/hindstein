@@ -59,8 +59,8 @@ io.on('connection', function (socket) {
         }) 
         .then(function(result) {
             console.log('FIRE NOW');
-             console.log('Sending Message:' +messageToSend); 
-             console.log('Sending To:' + data.phoneNumber); 
+             console.log('Sending Message:' +result.messageToSend); 
+             console.log('Sending To:' + result.data.phoneNumber); 
              twillioSend("+14243747066",  "+17027488799", 'Test04', "http://img.hindste.in/welcome.png")
              
         });        
