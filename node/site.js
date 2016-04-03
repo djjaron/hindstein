@@ -113,7 +113,8 @@ io.on('connection', function (socket) {
         if (isAdmin == false){
             socket.emit('authAdmin', {auth:'failed'}); 
         } else {
-            if(data.image){
+            
+            if(data.image.length > 60){
                 console.log('Saving New Image');
                 console.log(data.image);
                 base64S3(data.image, 'welcome.png', 'png');
