@@ -57,7 +57,7 @@ io.on('connection', function (socket) {
         }) 
         .then(function(result) {
              console.log('Sending: '+ result);
-           twillioSend(data.phoneNumber, '+17027488799', 'testing website 1', 'http://img.hindste.in/welcome.jpg');
+           twillioSend(data.phoneNumber, '+17027488799', 'testing website 1', 'https://www.enterprise.com/content/dam/global-vehicle-images/cars/FORD_FOCU_2012-1.png');
         });        
     });
     
