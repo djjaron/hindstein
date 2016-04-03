@@ -243,6 +243,7 @@
     socket.on('saveWelcome', function (data) {
         if(data.state =='saved'){
             document.getElementById("saveWelcome").value = "SAVE WELCOME"; 
+            document.getElementById("weclomeImage").src = 'https://s3-us-west-2.amazonaws.com/img.hindste.in/welcome.jpg';  
         } else{
             
         }
