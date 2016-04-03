@@ -50,7 +50,7 @@ io.on('connection', function (socket) {
              var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
                 myFirebaseRef.once("value", function(snapshot) {
                     var message = snapshot.val(); 
-                    console.log(message.text);
+                    var messageToSend = message.text;
                     resolve(message);
                 }, function (errorObject) {
                     console.log("The read failed: " + errorObject.code);
@@ -58,8 +58,9 @@ io.on('connection', function (socket) {
                     })
         }) 
         .then(function(result) {
-            // console.log('Sending: '+ result.val()); 
-             twillioSend("+14243747066",  "+17027488799", 'Test03', "http://img.hindste.in/welcome.png")
+             console.log('Sending Message:' +messageToSend); 
+             console.log('Sending To:' + data.phoneNumber); 
+             twillioSend("+14243747066",  "+17027488799", 'Test04', "http://img.hindste.in/welcome.png")
              
         });        
     });
@@ -110,7 +111,7 @@ io.on('connection', function (socket) {
         if (isAdmin == false){
             socket.emit('authAdmin', {auth:'failed'}); 
         } else {
-            base64S3(data.image, 'welcome.png');
+            base64S3(data.image, 'welcome.png', 'png');
             var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
                 myFirebaseRef.set({
                         text: data.text,
@@ -196,13 +197,12 @@ io.on('connection', function (socket) {
     
     //------------------- AWS --------------------------
     
-    function base64S3(image, name){
+    function base64S3(image, name, type){
         var buf = new Buffer(image.replace(/^data:image\/\w+;base64,/, ""),'base64')
         var data = {
             Key: name, 
             Body: buf,
-          //  ContentEncoding: 'base64',
-            ContentType: 'image/png'
+            ContentType: 'image/'+type
         };
   
             s3Bucket.putObject(data, function(err, data){
