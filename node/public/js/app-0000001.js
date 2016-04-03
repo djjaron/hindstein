@@ -17,21 +17,24 @@
 
 //---- Event Listeners
     var loc = window.location.pathname;
+    console.log(loc); 
 //-- HOME
 
-        console.log('ready');
+    if (loc =='/' ){      
     document.getElementById("sendPhoneNumber").addEventListener("click", sendPhoneNumber);
     document.getElementById("phoneNumber").addEventListener("focus", addCountryCode);
     document.getElementById("number").addEventListener("click", focusPhoneNumber);
     window.addEventListener("load", restylePhoneNumber);
     window.addEventListener("resize", restylePhoneNumber);
-
+    }
 //--Admin Login
     if(loc =='/admin/'){
+          console.log(loc);   
     document.getElementById("login").addEventListener("click", adminLogin);
     }
 //--Admin Home
     if(loc =='/admin/home/'){
+          console.log(loc);   
     authAdmin();
     window.addEventListener("load", restyleAdmin);
     window.addEventListener("load", getWelcome);

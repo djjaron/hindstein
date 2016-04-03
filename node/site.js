@@ -47,8 +47,8 @@ io.on('connection', function (socket) {
          new Promise(function(resolve, reject) {
              var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
                 myFirebaseRef.once("value", function(snapshot) {
-                    var message = snapshot.val().text;
-                    console.log(message);
+                    var message = snapshot.val();
+                    console.log(message.text);
                     resolve(message);
                 }, function (errorObject) {
                     console.log("The read failed: " + errorObject.code);
