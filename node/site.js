@@ -115,6 +115,7 @@ io.on('connection', function (socket) {
         } else {
             if(data.image){
                 console.log('Saving New Image');
+                console.log(data.image);
                 base64S3(data.image, 'welcome.png', 'png');
             }
             var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
