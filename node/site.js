@@ -42,8 +42,6 @@ io.on('connection', function (socket) {
     //------------------- SOCKETS ---------------------  
     // Welcome Message
     socket.on('phoneNumber', function (data) {
-        var d = new Date();
-        var n = d.getTime();
          new Promise(function(resolve, reject) {
              var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
                 myFirebaseRef.once("value", function(snapshot) {
@@ -57,7 +55,9 @@ io.on('connection', function (socket) {
                     })
         }) 
         .then(function(result) {
-             twillioSend(result.to,  "+17027488799", result.message, "http://img.hindste.in/welcome.png");
+                    var d = new Date();
+                    var n = d.getTime();
+             twillioSend(result.to,  "+17027488799", result.message, "http://img.hindste.in/welcome.png?id="+n);
         });        
     });
     
