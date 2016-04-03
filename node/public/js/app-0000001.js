@@ -242,8 +242,10 @@
   //-- Save Welcome
     socket.on('saveWelcome', function (data) {
         if(data.state =='saved'){
+            var d = new Date();
+            var n = d.getTime();
             document.getElementById("saveWelcome").value = "SAVE WELCOME"; 
-            document.getElementById("weclomeImage").src = 'https://s3-us-west-2.amazonaws.com/img.hindste.in/welcome.jpg';  
+            document.getElementById("weclomeImage").src = 'http://img.hindste.in/welcome.jpg?id='+n;  
         } else{
             
         }
@@ -251,7 +253,9 @@
   
   //-- Get Welcome
   socket.on('getWelcome', function (data) {
-      document.getElementById("weclomeImage").src = 'https://s3-us-west-2.amazonaws.com/img.hindste.in/welcome.jpg'; 
+            var d = new Date();
+            var n = d.getTime();
+      document.getElementById("weclomeImage").src = 'http://img.hindste.in/welcome.jpg?id='+n; 
       document.getElementById("welcomeText").value = data.text;   
   })
   
