@@ -60,13 +60,7 @@ io.on('connection', function (socket) {
         .then(function(result) {
              console.log('Sending: '+ result);
              
-             client.messages.create({ 
-	to: "+14243747066", 
-	from: "+17027488799", 
-	body: "Test Twillio33",   
-}, function(err, message) { 
-	console.log(message.sid); 
-});
+twillioSend();
              
          //  twillioSend(data.phoneNumber, '+17027488799', 'testing website 1', 'https://www.enterprise.com/content/dam/global-vehicle-images/cars/FORD_FOCU_2012-1.png');
         });        
@@ -173,29 +167,43 @@ io.on('connection', function (socket) {
     //------------------- TWILLIO --------------------- 
 
     function twillioSend(to, from, body, mediaUrl) {
-        console.log('To ' + to);
-        console.log('From ' + from);
-        console.log('Body ' + body);
-        console.log('mediaUrl ' + mediaUrl);
-
-        client.messages.create({
-            to: to,
-            from: from,
-            body: body,
-            mediaUrl: mediaUrl,
-        }, function (err, message) {
-
-            if (err) {
-                console.log('------ ERROR ------');
-                console.log(err);
-                socket.emit('phoneNumber', { twillioError: 'err' });
-            } else {
-                console.log('------ MESSAGE------');
-                console.log(message);
-                socket.emit('phoneNumber', { twillioMessage: message });
-                savePhoneNumber(to);
-            }
+        
+        
+        
+        
+        client.messages.create({ 
+            to: "+14243747066", 
+            from: "+17027488799", 
+            body: "Test Twillio66",   
+        }, function(err, message) { 
+            console.log(message.sid); 
         });
+
+
+
+        // console.log('To ' + to);
+        // console.log('From ' + from);
+        // console.log('Body ' + body);
+        // console.log('mediaUrl ' + mediaUrl);
+
+        // client.messages.create({
+        //     to: to,
+        //     from: from,
+        //     body: body,
+        //     mediaUrl: mediaUrl,
+        // }, function (err, message) {
+
+        //     if (err) {
+        //         console.log('------ ERROR ------');
+        //         console.log(err);
+        //         socket.emit('phoneNumber', { twillioError: 'err' });
+        //     } else {
+        //         console.log('------ MESSAGE------');
+        //         console.log(message);
+        //         socket.emit('phoneNumber', { twillioMessage: message });
+        //         savePhoneNumber(to);
+        //     }
+        // });
     }
     
     
