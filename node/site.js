@@ -47,7 +47,7 @@ io.on('connection', function (socket) {
          new Promise(function(resolve, reject) {
              var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
                 myFirebaseRef.once("value", function(snapshot) {
-                    var message = snapshot.val();
+                    var message = snapshot.val(); 
                     console.log(message.text);
                     resolve(message);
                 }, function (errorObject) {
@@ -56,7 +56,7 @@ io.on('connection', function (socket) {
                     })
         }) 
         .then(function(result) {
-             consoile.log(result);
+             console.log('Sending: '+ result);
            twillioSend(data.phoneNumber, '+1 424-231-2986', result, 'http://img.hindste.in/welcome.jpg?id='+n);
         });        
     });
