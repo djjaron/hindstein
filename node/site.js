@@ -41,6 +41,11 @@ io.on('connection', function (socket) {
 
     //------------------- SOCKETS ---------------------  
     // Welcome Message
+    // When a new number is entered on the home page
+    // get the welcome message from the database
+    // send the new subscriber a message
+    // save new number to the database
+    
     socket.on('phoneNumber', function (data) {
          new Promise(function(resolve, reject) {
              var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
@@ -58,7 +63,8 @@ io.on('connection', function (socket) {
                     var d = new Date();
                     var n = d.getTime();
              twillioSend(result.to,  "+17027488799", result.message, "http://img.hindste.in/welcome.png?id="+n);
-        });        
+            socket.emit('phoneNumberGood', {number:'good'}); 
+       });        
     });
     
     
@@ -217,10 +223,9 @@ io.on('connection', function (socket) {
     
     //-- SAVE PHONE NUMBER
     function savePhoneNumber(phoneNumber) {
-        var id = makeID();
-        var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/phoneNumbers/" + id);
+        var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/phoneNumbers/" + phoneNumber);
         myFirebaseRef.set({
-            phoneNumber: phoneNumber         
+            phone_number: phoneNumber         
         });
     }
     
