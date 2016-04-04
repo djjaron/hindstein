@@ -51,14 +51,17 @@ app.get('/pass/', function(req, res){
 /// f4d872843b26ecdd829ca8e919de51af    /registrations  /pass.in.hindste    /nmyuxofgna
 ///passUpdate/v1/devices/f4d872843b26ecdd829ca8e919de51af/registrations/pass.in.hindste/nmyuxofgna
 app.post('/passUpdate/v1/devices/*', function(req, res){
-
-console.log('-----------------------------------');
-var path  = req.path; // cut this up
+var path  = req.path;
 var parts = path.split("/");
-console.log(parts[3]);
-console.log(parts[4]);
-console.log('PUSH TOKEN: '+req.body.pushToken); 
-console.log('HEADERS: ' + JSON.stringify(req.headers.authorization));
+console.log('-----------------------------------');
+// The pass’s serial number, as specified in the pass.
+console.log('Serial Number'+parts[6]);
+// A unique identifier that is used to identify and authenticate this device in future requests.
+console.log('Device Library Identifier'+parts[4]);
+// The push token that the server can use to send push notifications to this device.
+console.log('Push Token: '+req.body.pushToken); 
+// authenticationToken From a pass
+console.log('Authentication Token: ' + JSON.stringify(req.headers.authorization));
 console.log('-----------------------------------');
 });
 
