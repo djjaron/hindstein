@@ -44,9 +44,11 @@ app.get('/pass/', function(req, res){
     res.download(file); 
 });
 
-
-// APPLE PASS API
-//-----------------------------------------------------------//
+//---------------------------------------------------------------//
+// APPLE WALLET API
+//---------------------------------------------------------------//
+// Registering a Device to Receive Push Notifications for a Pass
+//---------------------------------------------------------------//
 app.post('/passUpdate/v1/devices/*', function(req, res){
 
     var path  = req.path;
@@ -77,6 +79,15 @@ app.post('/passUpdate/v1/devices/*', function(req, res){
         });
 });
 
+
+
+// Logging Errors
+//---------------------------------------------------------------//
+app.post('/passUpdate/v1/log/*', function(req, res){
+    var error = req.body;
+    console.log(error);
+    res.sendStatus(200)
+});
 
 
 // start the server in port 9000 (nginx is listening)
