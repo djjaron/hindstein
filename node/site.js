@@ -91,12 +91,14 @@ app.get('/passUpdate/v1/*', function(req, res){
 
 // ALL DELETE
 //---------------------------------------------------------------//
+// /passUpdate/v1/devices/d79bcd7efbeb9ffe70c6d282580889fb/registrations/pass.in.hindste/nmyuxofgna
 app.delete('/passUpdate/v1/*', function(req, res){
     var path  = req.path;
-    var body = req.body;
+    var parts = path.split("/");
     console.log('delete');
-    console.log(body);
-    console.log(path);
+    console.log(parts[3]);
+    console.log(parts[6]);    
+  //  res.sendStatus(200);
 });
 
 // Logging Errors
