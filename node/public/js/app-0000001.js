@@ -13,7 +13,7 @@
 ///---------------------- START ------------------------    
  
 //---- Grab a socket
-   var socket = io.connect('http://hindste.in');
+   var socket = io.connect('https://hindste.in', {secure: true});
 
 //---- Event Listeners
     var loc = window.location.pathname;
