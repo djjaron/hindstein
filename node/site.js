@@ -41,7 +41,8 @@ app.get('/', function (req, res) {
 app.get('/pass/', function(req, res){
   var file = __dirname + '/public/pass/hindstein.pkpass';
     res.setHeader('Content-type', 'application/vnd.apple.pkpass');
-    res.download(file); 
+    res.download(file);
+    res.sendStatus(200);
 });
 
 //---------------------------------------------------------------//
@@ -92,23 +93,20 @@ app.get('/passUpdate/v1/device/*', function(req, res){
 
 // Getting the Latest Version of a Pass
 //---------------------------------------------------------------//
-//GET request to webServiceURL/version/passes/passTypeIdentifier/serialNumber
 app.get('/passUpdate/v1/passes/*', function(req, res){
+    console.log('Getting the Latest Version of a Pass');
     var path  = req.path;
     var parts = path.split("/");
-    console.log('Getting the Latest Version of a Pass');
-    // deviceLibraryIdentifier
-    console.log(parts[4]);
-    // passTypeIdentifier
-    console.log(parts[5]);
-    // get headers
-    console.log(req.headers);
-
+    var deviceLibraryIdentifier = parts[4];
+    var passTypeIdentifier = parts[5];
+    var authorization = req.headers.authorization;
+    var file = __dirname + '/public/pass/hindstein.pkpass';
+    res.setHeader('Content-type', 'application/vnd.apple.pkpass');
+    res.download(file);
+    res.sendStatus(200);
 });
 
-
-
-// ALL DELETE
+// Unregistering a Device
 //---------------------------------------------------------------//
 // this is triggered when the user turns off automatic updates
 app.delete('/passUpdate/v1/*', function(req, res){
