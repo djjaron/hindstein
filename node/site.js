@@ -46,13 +46,16 @@ app.get('/pass/', function(req, res){
 
 
 // APPLE PASS API
-
-/// deviceLibraryIdentifier             /registrations  /passTypeIdentifier /serialNumber
-/// f4d872843b26ecdd829ca8e919de51af    /registrations  /pass.in.hindste    /nmyuxofgna
-///passUpdate/v1/devices/f4d872843b26ecdd829ca8e919de51af/registrations/pass.in.hindste/nmyuxofgna
+//-----------------------------------------------------------//
 app.post('/passUpdate/v1/devices/*', function(req, res){
-var path  = req.path;
-var parts = path.split("/");
+    var path  = req.path;
+    var parts = path.split("/");
+        var serialNumber = parts[7];
+        var deviceLibraryIdentifier = parts[4];
+        var pushToken = req.body.pushToken
+        var authenticationToken = req.headers.authorization
+
+
 console.log('-----------------------------------');
 // The pass’s serial number, as specified in the pass.
 console.log('Serial Number: '+parts[7]);
@@ -61,9 +64,14 @@ console.log('Device Library Identifier: '+parts[4]);
 // The push token that the server can use to send push notifications to this device.
 console.log('Push Token: '+req.body.pushToken); 
 // authenticationToken From a pass
-console.log('Authentication Token: ' + JSON.stringify(req.headers.authorization));
+console.log('Authentication Token: ' + req.headers.authorization);
 console.log('-----------------------------------');
 });
+
+// If the serial number is already registered for this device, returns HTTP status 200.
+// If registration succeeds, returns HTTP status 201.
+// If the request is not authorized, returns HTTP status 401.
+// Otherwise, returns the appropriate standard HTTP status.
 
 
 // start the server in port 9000 (nginx is listening)
