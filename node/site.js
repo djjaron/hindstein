@@ -47,15 +47,18 @@ app.get('/pass/', function(req, res){
 
 // APPLE PASS API
 
-//webServiceURL/version/devices/deviceLibraryIdentifier/registrations/passTypeIdentifier/serialNumber
-app.post('/passUpdate/*', function(req, res){
+/// deviceLibraryIdentifier             /registrations  /passTypeIdentifier /serialNumber
+/// f4d872843b26ecdd829ca8e919de51af    /registrations  /pass.in.hindste    /nmyuxofgna
+///passUpdate/v1/devices/f4d872843b26ecdd829ca8e919de51af/registrations/pass.in.hindste/nmyuxofgna
+app.post('/passUpdate/v1/devices/*', function(req, res){
 
 console.log('-----------------------------------');
-console.log('URL: '+req.originalUrl); 
-console.log('PATH: '+req.path);    
+var path  = req.path; // cut this up
+var parts = path.split("/");
+console.log(parts[3]);
+console.log(parts[4]);
 console.log('PUSH TOKEN: '+req.body.pushToken); 
-console.log('HEADERS: ' + JSON.stringify(req.headers));
-console.log('BODY: ' + JSON.stringify(req.body));  
+console.log('HEADERS: ' + JSON.stringify(req.headers.authorization));
 console.log('-----------------------------------');
 });
 
