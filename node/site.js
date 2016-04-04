@@ -52,8 +52,10 @@ app.post('/passUpdate/*', function(req, res){
 
 console.log('-----------------------------------');
 console.log('URL: '+req.originalUrl); 
-console.log('PATH: '+req.path);   
-console.log('BODY: '+req.body);   
+console.log('PATH: '+req.path);    
+console.log('PUSH TOKEN: '+req.body.pushToken); 
+console.log('HEADERS: ' + JSON.stringify(req.headers));
+console.log('BODY: ' + JSON.stringify(req.body));  
 console.log('-----------------------------------');
 });
 
