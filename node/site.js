@@ -49,6 +49,7 @@ app.get('/pass/', function(req, res){
 //---------------------------------------------------------------//
 // Registering a Device to Receive Push Notifications for a Pass
 //---------------------------------------------------------------//
+// this is triggered when a users first adds te pass and when they turn on automatic updates 
 app.post('/passUpdate/v1/devices/*', function(req, res){
 
     var path  = req.path;
@@ -57,12 +58,7 @@ app.post('/passUpdate/v1/devices/*', function(req, res){
         var serialNumber = parts[7];
         var pushToken = req.body.pushToken;
         var authenticationToken = req.headers.authorization;
-    
-  // Get device from the database
-  // loop through all serial numbers
-  // if we find the serial number returns HTTP status 200.
-  // else do the below
-    
+        
     var db = firebaseRoot.child("hindstein/passes/"+deviceLibraryIdentifier+'/'+serialNumber);
         db.set({
             serial_Number: serialNumber,
@@ -81,17 +77,21 @@ app.post('/passUpdate/v1/devices/*', function(req, res){
 
 // ALL GET
 //---------------------------------------------------------------//
-app.get('/passUpdate/v1/*', function(req, res){
+app.get('/passUpdate/v1/device/*', function(req, res){
     var path  = req.path;
-    var body = req.body;
+    var parts = path.split("/");
     console.log('get');
-    console.log(body);
-    console.log(path);
+    // deviceLibraryIdentifier
+    console.log(parts[4]);
+    // passTypeIdentifier
+    console.log(parts[6]);
+    // passesUpdatedSince
+    console.log(req.query);
 });
 
 // ALL DELETE
 //---------------------------------------------------------------//
-// /passUpdate/v1/devices/d79bcd7efbeb9ffe70c6d282580889fb/registrations/pass.in.hindste/nmyuxofgna
+// this is triggered when the user turns off automatic updates
 app.delete('/passUpdate/v1/*', function(req, res){
     var path  = req.path;
     var parts = path.split("/");
@@ -105,6 +105,7 @@ app.delete('/passUpdate/v1/*', function(req, res){
 
 // Logging Errors
 //---------------------------------------------------------------//
+// this has not been trggered yet
 app.post('/passUpdate/v1/log/*', function(req, res){
     var error = req.body;
     var path  = req.path;
