@@ -102,7 +102,8 @@ app.get('/passUpdate/v1/passes/*', function(req, res){
     var authorization = req.headers.authorization;
     var file = __dirname + '/public/pass/hindstein.pkpass';
     //res.setHeader('Content-type', 'application/vnd.apple.pkpass');
-    //res.setHeader('Last-Modified', (new Date()).toUTCString());
+    //res.setHeader('Last-Modified', (new Date().toUTCString());
+    console.log(new Date().toUTCString());
     //res.attachment(file);
     //res.download(file);
     // res.sendFile(file);
