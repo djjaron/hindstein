@@ -107,7 +107,7 @@ app.get('/passUpdate/v1/passes/*', function(req, res){
     //res.attachment(file);
     //res.download(file);
     res.sendFile(file);
-    res.sendStatus(200);
+    //res.sendStatus(200);
 });
 
 // Unregistering a Device
