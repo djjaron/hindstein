@@ -52,14 +52,13 @@ app.post('/passUpdate/v1/devices/*', function(req, res){
     var parts = path.split("/");
         var device = parts[4];
         var serial = parts[7];
-        var pushToken = req.body.pushToken
-        var authenticationToken = req.headers.authorization
+        var pushToken = req.body.pushToken;
+        var authenticationToken = req.headers.authorization;
     
   // Get device from the database
   // loop through all serial numbers
   // if we find the serial number returns HTTP status 200.
   // else do the below
-    
     
     var db = firebaseRoot.child("hindstein/passes/"+device);
         db.set({
