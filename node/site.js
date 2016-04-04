@@ -96,9 +96,11 @@ app.delete('/passUpdate/v1/*', function(req, res){
     var path  = req.path;
     var parts = path.split("/");
     console.log('delete');
-    console.log(parts[4]);
-    console.log(parts[7]);    
-  //  res.sendStatus(200);
+    var deviceLibraryIdentifier = parts[4];
+    var serialNumber = parts[7];    
+     var db = firebaseRoot.child("hindstein/passes/"+deviceLibraryIdentifier+'/'+serialNumber);
+        db.remove();
+        res.sendStatus(200);
 });
 
 // Logging Errors
