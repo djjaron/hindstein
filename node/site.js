@@ -50,28 +50,33 @@ app.get('/pass/', function(req, res){
 app.post('/passUpdate/v1/devices/*', function(req, res){
     var path  = req.path;
     var parts = path.split("/");
-        var serialNumber = parts[7];
-        var deviceLibraryIdentifier = parts[4];
+        var device = parts[4];
+        var serial = parts[7];
         var pushToken = req.body.pushToken
         var authenticationToken = req.headers.authorization
+    
+  // Get device from the database
+  // loop through all serial numbers
+  // if we find the serial number returns HTTP status 200.
+  // else do the below
+    
+    
+    var db = firebaseRoot.child("hindstein/passes/"+device);
+        db.set({
+            serial: serial,
+            pushToken: pushToken,
+            authenticationToken: authenticationToken
+        }, function(error){
+            if (error) {
+            console.log("Data could not be saved." + error);
+            } else {
+            console.log("Data saved to Firebase successfully.");
+            socket.emit('saveWelcome', {state:'saved'}); 
+            res.sendStatus(201)
+            }
+        });
+        
 
-
-console.log('-----------------------------------');
-// The pass’s serial number, as specified in the pass.
-console.log('Serial Number: '+parts[7]);
-// A unique identifier that is used to identify and authenticate this device in future requests.
-console.log('Device Library Identifier: '+parts[4]);
-// The push token that the server can use to send push notifications to this device.
-console.log('Push Token: '+req.body.pushToken); 
-// authenticationToken From a pass
-console.log('Authentication Token: ' + req.headers.authorization);
-console.log('-----------------------------------');
-});
-
-// If the serial number is already registered for this device, returns HTTP status 200.
-// If registration succeeds, returns HTTP status 201.
-// If the request is not authorized, returns HTTP status 401.
-// Otherwise, returns the appropriate standard HTTP status.
 
 
 // start the server in port 9000 (nginx is listening)
