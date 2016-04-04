@@ -107,7 +107,7 @@ app.get('/passUpdate/v1/passes/*', function(req, res){
     //res.download(file);
     // res.sendFile(file);
     //res.sendStatus(200);
-    res.status(500).json({
+    res.status(200).json({
   "formatVersion" : 1,
   "passTypeIdentifier" : "pass.in.hindste",
   "serialNumber" : "nmyuxofgna",
