@@ -19,6 +19,7 @@ var express = require('express'),
     AWS = require('aws-sdk');
     AWS.config.loadFromPath('./s3_config.json');
     var s3Bucket = new AWS.S3( { params: {Bucket: 'img.hindste.in'} } );
+    var firebaseRoot = new Firebase("https://hindstein.firebaseio.com/");
     
     
 
@@ -30,6 +31,15 @@ app.get('/', function (req, res) {
     res.render('/public/index.html');
     console.log('Page Served');
 });
+
+
+app.get('/pass/', function(req, res){
+  var file = __dirname + '/public/pass/hindstein.pkpass';
+    res.setHeader('Content-type', 'application/vnd.apple.pkpass');
+    res.download(file); 
+});
+
+
 
 // start the server in port 9000 (nginx is listening)
 server.listen(9000);
@@ -48,8 +58,8 @@ io.on('connection', function (socket) {
     
     socket.on('phoneNumber', function (data) {
          new Promise(function(resolve, reject) {
-             var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
-                myFirebaseRef.once("value", function(snapshot) {
+            var db = firebaseRoot.child("hindstein/welcomeSMS");
+                db.once("value", function(snapshot) {
                     var message = snapshot.val();
                     var cleanMessage = message.text; 
                     var messageToSend = {message:cleanMessage, to:data.phoneNumber};
@@ -70,8 +80,7 @@ io.on('connection', function (socket) {
     
     // Admin Login
       socket.on('adminLogin', function (data) {           
-        var ref = new Firebase("https://hindstein.firebaseio.com");
-        ref.authWithPassword({
+        firebaseRoot.authWithPassword({
                 email    : data.username,
                 password : data.password
         }, function(error, authData) {
@@ -82,8 +91,8 @@ io.on('connection', function (socket) {
                 socket.emit('adminLogin', {login:'passed', uid:authData.uid});
             }
         });
-
     });
+    
     
    // Auth Admin
     socket.on('authAdmin', function (data) {
@@ -92,8 +101,8 @@ io.on('connection', function (socket) {
             socket.emit('authAdmin', {auth:'failed'}); 
         } else {
         new Promise(function(resolve, reject) {
-             var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/phoneNumbers/");
-                myFirebaseRef.once("value", function(snapshot) {
+             var db = firebaseRoot.child("hindstein/phoneNumbers");
+                db.once("value", function(snapshot) {
                     var subscribers = snapshot.numChildren();
                     resolve(subscribers);
                 }, function (errorObject) {
@@ -107,6 +116,7 @@ io.on('connection', function (socket) {
         } // End Else
     });
     
+    
     // Save Welcome SMS
     socket.on('saveWelcome', function (data){
         var isAdmin = checkAdmin(data.uid);
@@ -116,11 +126,10 @@ io.on('connection', function (socket) {
             
             if(data.image.length > 60){
                 console.log('Saving New Image');
-                console.log(data.image);
                 base64S3(data.image, 'welcome.png', 'png');
             }
-            var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
-                myFirebaseRef.set({
+            var db = firebaseRoot.child("hindstein/welcomeSMS");
+                db.set({
                         text: data.text,
                 }, function(error){
                         if (error) {
@@ -135,25 +144,23 @@ io.on('connection', function (socket) {
     
     // getWelcome
     socket.on('getWelcome', function (data){
-        var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/welcomeSMS/");
-          myFirebaseRef.once("value", function(snapshot) {
+        var db = firebaseRoot.child("hindstein/welcomeSMS");
+          db.once("value", function(snapshot) {
               var data = snapshot.val();
                 socket.emit('getWelcome', {image:data.image, text:data.text}); 
             }, function (errorObject) {
                 console.log("The read failed: " + errorObject.code);       
             })
-        
     });
     
     // sendMessage
     socket.on('sendMessage', function(data){
             var myID = makeID();
-            console.log(myID);
-            base64S3(data.image, myID+'.png', 'png');
-            // use the id to save the text to the databse with a date
-        
-        var myFirebaseRef = new Firebase("https://hindstein.firebaseio.com/hindstein/phoneNumbers/");
-            myFirebaseRef.once("value", function(snapshot) {
+            if(data.image){
+                base64S3(data.image, myID+'.png', 'png');
+            }
+        var db = firebaseRoot.child("hindstein/phoneNumbers");
+            db.once("value", function(snapshot) {
             // Start Loop
                 snapshot.forEach(function(childSnapshot) {
                     var sendTo = (childSnapshot.val().phone_number);
@@ -165,16 +172,10 @@ io.on('connection', function (socket) {
                     console.log("The read failed: " + errorObject.code);
                 })
     });
-    
-    /// SHOULD WE STOP ANOTHER MESSAGE BEING SENT TODAY?
-    /// SHOULD WE SEND A TEST TO ADMIN BEFORE SENDING TO SIBSCRIBERS?
-    
-    
-      
+        
     //------------------- TWILLIO --------------------- 
 
-    function twillioSend(to, sentFrom, body, mediaUrl) {
-                
+    function twillioSend(to, sentFrom, body, mediaUrl) {            
         client.messages.create({ 
             to: to, 
             from: sentFrom, 
@@ -182,48 +183,35 @@ io.on('connection', function (socket) {
             mediaUrl: mediaUrl,  
         }, function(err, message) { 
             if (err) {
-                console.log('------ ERROR ------');
                 console.log(err);
                 socket.emit('phoneNumber', { twillioError: 'err' });
             } else {
-                console.log('------ MESSAGE------');
-                console.log(message);
-                socket.emit('phoneNumber', { twillioMessage: message });
+                console.log('SMS Sent: '+to);
                 savePhoneNumber(to);
             }
         });
     }
-    
     
     //------------------- UUID --------------------
     
     function makeID() {
         return uuid.create().toString();
     }
-    
-    
+
     //------------------- AWS --------------------------
     
     function base64S3(image, name, type){
         var buf = new Buffer(image.replace(/^data:image\/\w+;base64,/, ""),'base64')
-        var data = {
-            Key: name, 
-            Body: buf,
-            ContentType: 'image/'+type
-        };
-  
+        var data = {Key: name, Body: buf, ContentType: 'image/' + type };
             s3Bucket.putObject(data, function(err, data){
                 if (err) { 
-                console.log(err);
                 console.log('Error uploading data: ', data); 
                 } else {
                 console.log('succesfully uploaded the image!');
-            }
-        }); 
+                }
+            }); 
     }
-    
-
-  
+ 
     //------------------- FIREBASE --------------------- 
     
     //-- SAVE PHONE NUMBER
@@ -252,7 +240,5 @@ io.on('connection', function (socket) {
         });
     }
     
-
-       
     //------------------- END ---------------------  
 });

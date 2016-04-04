@@ -6,3 +6,4 @@ data.json
 npm-debug.log
 rethinkdb_data
 config.json
+wallet
