@@ -80,7 +80,7 @@ app.post('/passUpdate/v1/devices/*', function(req, res){
 app.get('/passUpdate/v1/device/*', function(req, res){
     var path  = req.path;
     var parts = path.split("/");
-    console.log('get');
+    console.log('Getting the Serial Numbers for Passes Associated with a Device');
     // deviceLibraryIdentifier
     console.log(parts[4]);
     // passTypeIdentifier
@@ -96,7 +96,7 @@ app.get('/passUpdate/v1/device/*', function(req, res){
 app.get('/passUpdate/v1/passes/*', function(req, res){
     var path  = req.path;
     var parts = path.split("/");
-    console.log('get');
+    console.log('Getting the Latest Version of a Pass');
     // deviceLibraryIdentifier
     console.log(parts[4]);
     // passTypeIdentifier
