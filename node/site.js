@@ -45,15 +45,11 @@ app.get('/pass/', function(req, res){
 });
 
 
-app.use(function (req, res, next) {
-  console.log('USE: '+req.body) // populated!
-  next();
-})
+// APPLE PASS API
 
-
-app.post('/passUpdate/*', function(req, res){
-// Save this to the database
-console.log('POST: '+JSON.stringify(req.body));
+//webServiceURL/version/devices/deviceLibraryIdentifier/registrations/passTypeIdentifier/serialNumber
+app.post('/passUpdate/version/devices/', function(req, res){
+console.log('POST: '+JSON.stringify(req.header));
 });
 
 
