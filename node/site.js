@@ -74,20 +74,38 @@ app.post('/passUpdate/v1/devices/*', function(req, res){
             console.log("Data could not be saved." + error);
             } else {
             console.log("Data saved to Firebase successfully.");
-            res.sendStatus(201)
+            res.sendStatus(201);
             }
         });
 });
 
+// ALL GET
+//---------------------------------------------------------------//
+app.get('/passUpdate/v1/*', function(req, res){
+    var body = req.body;
+    console.log(body);
+});
 
+// ALL DELETE
+//---------------------------------------------------------------//
+app.delete('/passUpdate/v1/*', function(req, res){
+    var body = req.body;
+    console.log(body);
+});
 
 // Logging Errors
 //---------------------------------------------------------------//
 app.post('/passUpdate/v1/log/*', function(req, res){
     var error = req.body;
+    console.log('------ PASS API ERROR ------');
     console.log(error);
-    res.sendStatus(200)
+    res.sendStatus(200);
 });
+
+
+
+
+
 
 
 // start the server in port 9000 (nginx is listening)
