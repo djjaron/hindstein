@@ -96,8 +96,8 @@ app.delete('/passUpdate/v1/*', function(req, res){
     var path  = req.path;
     var parts = path.split("/");
     console.log('delete');
-    console.log(parts[3]);
-    console.log(parts[6]);    
+    console.log(parts[4]);
+    console.log(parts[7]);    
   //  res.sendStatus(200);
 });
 
