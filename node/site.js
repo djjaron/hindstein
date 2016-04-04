@@ -34,7 +34,7 @@ app.get('/', function (req, res) {
 
 
 app.get('/pass/', function(req, res){
-  var file = __dirname + '/public/pass/Hindstein.pkpass';
+  var file = __dirname + '/public/pass/hindstein.pkpass';
     res.setHeader('Content-type', 'application/vnd.apple.pkpass');
     res.download(file); 
 });
