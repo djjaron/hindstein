@@ -63,9 +63,9 @@ app.post('/passUpdate/v1/devices/*', function(req, res){
   // if we find the serial number returns HTTP status 200.
   // else do the below
     
-    var db = firebaseRoot.child("hindstein/passes/"+deviceLibraryIdentifier);
+    var db = firebaseRoot.child("hindstein/passes/"+deviceLibraryIdentifier+'/'+serialNumber);
         db.set({
-            serial_number: serialNumber,
+            serial_Number: serialNumber,
             push_token: pushToken,
             authentication_token: authenticationToken,
             device_library_identifier: deviceLibraryIdentifier
