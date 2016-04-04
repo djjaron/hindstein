@@ -100,11 +100,10 @@ app.get('/passUpdate/v1/passes/*', function(req, res){
     var deviceLibraryIdentifier = parts[4];
     var passTypeIdentifier = parts[5];
     var authorization = req.headers.authorization;
-    var file = __dirname + '/public/pass/hindstein.pkpass';
-    console.log(file);
+    //var file = __dirname + '/public/pass/hindstein.pkpass';
     res.setHeader('Content-type', 'application/vnd.apple.pkpass');
     res.setHeader('Last-Modified', (new Date()).toUTCString());
-    res.attachment(file);
+    res.attachment('https://www.hindste.in/pass/hindstein.pkpass');
     //res.download(file);
     // res.sendFile(file);
     res.sendStatus(200);
