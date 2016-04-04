@@ -26,7 +26,7 @@ var express = require('express'),
     
 
 // use the body paerser to get post and head data
-app.use(bodyParser());
+app.use(bodyParser.json());
 
 // allow access to all public files
 app.use(express.static(__dirname + '/public'));
