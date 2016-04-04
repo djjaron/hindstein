@@ -106,75 +106,7 @@ app.get('/passUpdate/v1/passes/*', function(req, res){
     //res.attachment(file);
     //res.download(file);
     // res.sendFile(file);
-    //res.sendStatus(200);
-    res.status(200).json({
-  "formatVersion" : 1,
-  "passTypeIdentifier" : "pass.in.hindste",
-  "serialNumber" : "nmyuxofgna",
-  "teamIdentifier" : "JK6JX2YGV7",
-  "webServiceURL" : "https://hindste.in/passUpdate/",
-  "authenticationToken" : "vxwxd7J8AlNNFPS8k0a0FfUFtq0ewzFda",
-  "relevantDate" : "2011-12-08T13:00-08:00",
-  "locations" : [
-    {
-      "longitude" : -122.3748889,
-      "latitude" : 37.6189722
-    },
-    {
-      "longitude" : -122.03118,
-      "latitude" : 37.33182
-    }
-  ],
-  "beacons": [
-    {
-      "proximityUUID":"F8F589E9-C07E-58B0-AEAB-A36BE4D48FAC",
-      "relevantText":"You're near the party",
-      "name" : "My House"
-} ],
-  "barcode" : {
-    "message" : "123456789",
-    "format" : "PKBarcodeFormatPDF417",
-    "messageEncoding" : "iso-8859-1"
-  },
-  "organizationName" : "Hindstein Inc.",
-  "description" : "Hindstein Event Ticket",
-  "foregroundColor" : "rgb(255, 255, 255)",
-  "backgroundColor" : "rgb(60, 65, 76)",
-  "eventTicket" : {
-    "primaryFields" : [
-      {
-        "key" : "event",
-        "label" : "YOU ARE INVITED TO:",
-        "value" : "Hindstein Launch"
-      }
-    ],
-	"secondaryFields" : [
-      {
-        "key" : "loc",
-        "label" : "LOCATION",
-        "value" : "Jarons House"
-      }
-    ],
-    "backFields" : [
-        {
-            "key" : "website",
-            "label" : "My Website",
-            "value" : "https://www.hindste.in"
-        },
-        {
-            "key" : "customer-service",
-            "label" : "Call Me",
-            "value" : "+1 424-374-7066"
-        },
-        {
-            "key" : "details",
-            "label" : "Invitation Details",
-            "value" : "The bearer of this pass is formally invited to join the Hindste.in launch party, you may bring one guest.\n\n Dress code is strictly formal.\n\n Please do not block the traffic when parking!"
-        }
-    ]
-  }
-}
-);
+    res.sendStatus(304);
 });
 
 // Unregistering a Device
