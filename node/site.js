@@ -34,11 +34,15 @@ app.get('/', function (req, res) {
 
 
 app.get('/pass/', function(req, res){
-  var file = __dirname + '/public/pass/hindstein.pkpass';
+  var file = __dirname + '/public/pass/Hindstein.pkpass';
     res.setHeader('Content-type', 'application/vnd.apple.pkpass');
     res.download(file); 
 });
 
+app.get('/passUpdate/', function(req, res){
+// Save this to the database
+console.log(JSON.stringify(req.body));
+});
 
 
 // start the server in port 9000 (nginx is listening)
