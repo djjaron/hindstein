@@ -82,26 +82,32 @@ app.post('/passUpdate/v1/devices/*', function(req, res){
 // ALL GET
 //---------------------------------------------------------------//
 app.get('/passUpdate/v1/*', function(req, res){
+    var path  = req.path;
     var body = req.body;
     console.log('get');
     console.log(body);
+    console.log(path);
 });
 
 // ALL DELETE
 //---------------------------------------------------------------//
 app.delete('/passUpdate/v1/*', function(req, res){
+    var path  = req.path;
     var body = req.body;
     console.log('delete');
     console.log(body);
+    console.log(path);
 });
 
 // Logging Errors
 //---------------------------------------------------------------//
 app.post('/passUpdate/v1/log/*', function(req, res){
     var error = req.body;
+    var path  = req.path;
     console.log('------ PASS API ERROR ------');
     console.log(error);
     res.sendStatus(200);
+    console.log(path);
 });
 
 
