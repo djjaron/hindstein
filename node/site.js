@@ -106,7 +106,8 @@ app.get('/passUpdate/v1/passes/*', function(req, res){
     //res.attachment(file);
     //res.download(file);
     // res.sendFile(file);
-    res.json({
+    //res.sendStatus(200);
+    res.status(500).json({
   "formatVersion" : 1,
   "passTypeIdentifier" : "pass.in.hindste",
   "serialNumber" : "nmyuxofgna",
@@ -172,8 +173,8 @@ app.get('/passUpdate/v1/passes/*', function(req, res){
         }
     ]
   }
-});
-    res.sendStatus(200);
+}
+);
 });
 
 // Unregistering a Device
