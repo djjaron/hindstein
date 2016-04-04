@@ -51,8 +51,8 @@ app.post('/passUpdate/v1/devices/*', function(req, res){
 
     var path  = req.path;
     var parts = path.split("/");
-        var device = parts[4];
-        var serial = parts[7];
+        var deviceLibraryIdentifier = parts[4];
+        var serialNumber = parts[7];
         var pushToken = req.body.pushToken;
         var authenticationToken = req.headers.authorization;
     
@@ -61,11 +61,11 @@ app.post('/passUpdate/v1/devices/*', function(req, res){
   // if we find the serial number returns HTTP status 200.
   // else do the below
     
-    var db = firebaseRoot.child("hindstein/passes/"+device);
+    var db = firebaseRoot.child("hindstein/passes/"+deviceLibraryIdentifier);
         db.set({
-            serial: serial,
-            pushToken: pushToken,
-            authenticationToken: authenticationToken
+            serial_number: serialNumber,
+            push_token: pushToken,
+            authentication_token: authenticationToken
         }, function(error){
             if (error) {
             console.log("Data could not be saved." + error);
@@ -74,7 +74,6 @@ app.post('/passUpdate/v1/devices/*', function(req, res){
             res.sendStatus(201)
             }
         });
-
 });
 
 
