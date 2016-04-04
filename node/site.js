@@ -101,6 +101,8 @@ app.get('/passUpdate/v1/passes/*', function(req, res){
     console.log(parts[4]);
     // passTypeIdentifier
     console.log(parts[5]);
+    // get headers
+    console.log(req.headers);
 
 });
 
