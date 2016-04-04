@@ -71,7 +71,6 @@ app.post('/passUpdate/v1/devices/*', function(req, res){
             console.log("Data could not be saved." + error);
             } else {
             console.log("Data saved to Firebase successfully.");
-            socket.emit('saveWelcome', {state:'saved'}); 
             res.sendStatus(201)
             }
         });
