@@ -75,7 +75,7 @@ app.post('/passUpdate/v1/devices/*', function(req, res){
         });
 });
 
-// ALL GET
+// Getting the Serial Numbers for Passes Associated with a Device
 //---------------------------------------------------------------//
 app.get('/passUpdate/v1/device/*', function(req, res){
     var path  = req.path;
@@ -88,6 +88,23 @@ app.get('/passUpdate/v1/device/*', function(req, res){
     // passesUpdatedSince
     console.log(req.query);
 });
+
+
+// Getting the Latest Version of a Pass
+//---------------------------------------------------------------//
+//GET request to webServiceURL/version/passes/passTypeIdentifier/serialNumber
+app.get('/passUpdate/v1/passes/*', function(req, res){
+    var path  = req.path;
+    var parts = path.split("/");
+    console.log('get');
+    // deviceLibraryIdentifier
+    console.log(parts[4]);
+    // passTypeIdentifier
+    console.log(parts[5]);
+
+});
+
+
 
 // ALL DELETE
 //---------------------------------------------------------------//
