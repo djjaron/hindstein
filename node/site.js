@@ -65,7 +65,8 @@ app.post('/passUpdate/v1/devices/*', function(req, res){
         db.set({
             serial_number: serialNumber,
             push_token: pushToken,
-            authentication_token: authenticationToken
+            authentication_token: authenticationToken,
+            device_library_identifier: deviceLibraryIdentifier
         }, function(error){
             if (error) {
             console.log("Data could not be saved." + error);
