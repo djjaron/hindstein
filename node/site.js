@@ -20,8 +20,13 @@ var express = require('express'),
     AWS.config.loadFromPath('./s3_config.json');
     var s3Bucket = new AWS.S3( { params: {Bucket: 'img.hindste.in'} } );
     var firebaseRoot = new Firebase("https://hindstein.firebaseio.com/");
+    var bodyParser = require('body-parser');
     
     
+    
+
+// use the body paerser to get post and head data
+app.use(bodyParser());
 
 // allow access to all public files
 app.use(express.static(__dirname + '/public'));
@@ -39,9 +44,16 @@ app.get('/pass/', function(req, res){
     res.download(file); 
 });
 
-app.all('/passUpdate/*', function(req, res){
+
+app.use(function (req, res, next) {
+  console.log('USE: '+req.body) // populated!
+  next();
+})
+
+
+app.post('/passUpdate/*', function(req, res){
 // Save this to the database
-console.log(JSON.stringify(req.body));
+console.log('POST: '+JSON.stringify(req.body));
 });
 
 
