@@ -48,6 +48,7 @@ app.get('/pass/', function(req, res){
 // APPLE PASS API
 //-----------------------------------------------------------//
 app.post('/passUpdate/v1/devices/*', function(req, res){
+
     var path  = req.path;
     var parts = path.split("/");
         var device = parts[4];
@@ -74,7 +75,8 @@ app.post('/passUpdate/v1/devices/*', function(req, res){
             res.sendStatus(201)
             }
         });
-        
+
+});
 
 
 
