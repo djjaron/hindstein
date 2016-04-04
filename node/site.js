@@ -55,9 +55,9 @@ var path  = req.path;
 var parts = path.split("/");
 console.log('-----------------------------------');
 // The pass’s serial number, as specified in the pass.
-console.log('Serial Number'+parts[6]);
+console.log('Serial Number: '+parts[7]);
 // A unique identifier that is used to identify and authenticate this device in future requests.
-console.log('Device Library Identifier'+parts[4]);
+console.log('Device Library Identifier: '+parts[4]);
 // The push token that the server can use to send push notifications to this device.
 console.log('Push Token: '+req.body.pushToken); 
 // authenticationToken From a pass
