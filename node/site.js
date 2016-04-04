@@ -83,6 +83,7 @@ app.post('/passUpdate/v1/devices/*', function(req, res){
 //---------------------------------------------------------------//
 app.get('/passUpdate/v1/*', function(req, res){
     var body = req.body;
+    console.log('get');
     console.log(body);
 });
 
@@ -90,6 +91,7 @@ app.get('/passUpdate/v1/*', function(req, res){
 //---------------------------------------------------------------//
 app.delete('/passUpdate/v1/*', function(req, res){
     var body = req.body;
+    console.log('delete');
     console.log(body);
 });
 
