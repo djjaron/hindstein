@@ -48,8 +48,13 @@ app.get('/pass/', function(req, res){
 // APPLE PASS API
 
 //webServiceURL/version/devices/deviceLibraryIdentifier/registrations/passTypeIdentifier/serialNumber
-app.post('/passUpdate/version/devices/', function(req, res){
-console.log('POST: '+JSON.stringify(req.header));
+app.post('/passUpdate/*', function(req, res){
+
+console.log('-----------------------------------');
+console.log('URL: '+req.originalUrl); 
+console.log('PATH: '+req.path);   
+console.log('BODY: '+req.body);   
+console.log('-----------------------------------');
 });
 
 
