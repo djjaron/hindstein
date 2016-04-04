@@ -39,7 +39,7 @@ app.get('/pass/', function(req, res){
     res.download(file); 
 });
 
-app.get('/passUpdate/*', function(req, res){
+app.all('/passUpdate/*', function(req, res){
 // Save this to the database
 console.log(JSON.stringify(req.body));
 });
