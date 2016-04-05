@@ -18,10 +18,17 @@ var express = require('express'),
     uuid = require('uuid-js'),
     AWS = require('aws-sdk');
     AWS.config.loadFromPath('./s3_config.json');
+    var request = require('request');
     var s3Bucket = new AWS.S3( { params: {Bucket: 'img.hindste.in'} } );
     var firebaseRoot = new Firebase("https://hindstein.firebaseio.com/");
     var bodyParser = require('body-parser');
-    
+    var xirsys = {
+            ident: 'willinchina',
+            secret: '226f3508-fb03-11e5-9953-7457f7e6b412',
+            domain: 'www.hindste.in',
+            application: 'interview',
+            secure: 1
+        }
     
     
 
@@ -46,12 +53,13 @@ app.get('/pass/', function(req, res){
 
 });
 
+
 //---------------------------------------------------------------//
 // APPLE WALLET API
 //---------------------------------------------------------------//
 // Registering a Device to Receive Push Notifications for a Pass
 //---------------------------------------------------------------//
-// this is triggered when a users first adds te pass and when they turn on automatic updates 
+// this is triggered when a users first adds the pass and when they turn on automatic updates 
 app.post('/passUpdate/v1/devices/*', function(req, res){
 
     var path  = req.path;
@@ -132,11 +140,6 @@ app.post('/passUpdate/v1/log/*', function(req, res){
     res.sendStatus(200);
     console.log(path);
 });
-
-
-
-
-
 
 
 // start the server in port 9000 (nginx is listening)
@@ -270,6 +273,35 @@ io.on('connection', function (socket) {
                     console.log("The read failed: " + errorObject.code);
                 })
     });
+    
+    // getIce
+ //   socket.on('getIce', function(data){
+        
+        var room = data.room;
+
+        request({
+            url: 'https://service.xirsys.com/ice', 
+            qs: {
+            ident: xirsys.ident,
+            secret: xirsys.secret,
+            domain: xirsys.domain,
+            application: xirsys.application,
+            room: room,
+            secure: 1
+            }, 
+            method: 'GET', 
+        }, function(error, response, body){
+            if(error) {
+            console.log(error);
+            } else {
+            console.log(response.statusCode, body);
+             socket.emit('getIce', {ice:body}); 
+            
+            }
+        });
+       
+ //   });
+    
         
     //------------------- TWILLIO --------------------- 
 
