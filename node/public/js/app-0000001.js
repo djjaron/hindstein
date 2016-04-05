@@ -43,6 +43,11 @@
     document.getElementById("welcomeUpload").addEventListener("change", welcomeUpload);
     document.getElementById("messageUpload").addEventListener("change", messageUpload);
     }
+    
+    if(loc =='/admin/video/'){  
+    authAdmin();
+    window.addEventListener("load", getIce);
+    }
 
 
 //----- Functoins
@@ -209,7 +214,17 @@
         socket.emit('getMessage',{uid:uid});
     }
     
+    function getIce(){
+         socket.emit('getIce',{room:'founders'});
+    }
+    
 //----- Incoming Socket
+
+//-- Get Ice
+  socket.on('getIce', function (data) {
+       condole.log(data.ice);
+  });
+
 
 //-- Auth Admin
   socket.on('authAdmin', function (data) {
