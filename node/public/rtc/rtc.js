@@ -1,37 +1,34 @@
 var localVideo;
 var remoteVideo;
 var peerConnection;
-var peerConnectionConfig = {        "iceServers": [
-            {
-                "url": "stun:turn01.uswest.xirsys.com"
-            },
-            {
-                "username": "e84ebc96-fb0b-11e5-86ed-65978be131e0",
-                "url": "turn:turn01.uswest.xirsys.com:443?transport=udp",
-                "credential": "e84ebd7c-fb0b-11e5-87e9-873e2343eb75"
-            },
-            {
-                "username": "e84ebc96-fb0b-11e5-86ed-65978be131e0",
-                "url": "turn:turn01.uswest.xirsys.com:443?transport=tcp",
-                "credential": "e84ebd7c-fb0b-11e5-87e9-873e2343eb75"
-            },
-            {
-                "username": "e84ebc96-fb0b-11e5-86ed-65978be131e0",
-                "url": "turn:turn01.uswest.xirsys.com:5349?transport=udp",
-                "credential": "e84ebd7c-fb0b-11e5-87e9-873e2343eb75"
-            },
-            {
-                "username": "e84ebc96-fb0b-11e5-86ed-65978be131e0",
-                "url": "turn:turn01.uswest.xirsys.com:5349?transport=tcp",
-                "credential": "e84ebd7c-fb0b-11e5-87e9-873e2343eb75"
-            }
-        ]
-};
-
-
-
-
-
+var peerConnectionConfig = {       
+    
+            "iceServers": [
+                {
+                    "url": "stun:turn01.uswest.xirsys.com"
+                },
+                {
+                    "username": "e84ebc96-fb0b-11e5-86ed-65978be131e0",
+                    "url": "turn:turn01.uswest.xirsys.com:443?transport=udp",
+                    "credential": "e84ebd7c-fb0b-11e5-87e9-873e2343eb75"
+                },
+                {
+                    "username": "e84ebc96-fb0b-11e5-86ed-65978be131e0",
+                    "url": "turn:turn01.uswest.xirsys.com:443?transport=tcp",
+                    "credential": "e84ebd7c-fb0b-11e5-87e9-873e2343eb75"
+                },
+                {
+                    "username": "e84ebc96-fb0b-11e5-86ed-65978be131e0",
+                    "url": "turn:turn01.uswest.xirsys.com:5349?transport=udp",
+                    "credential": "e84ebd7c-fb0b-11e5-87e9-873e2343eb75"
+                },
+                {
+                    "username": "e84ebc96-fb0b-11e5-86ed-65978be131e0",
+                    "url": "turn:turn01.uswest.xirsys.com:5349?transport=tcp",
+                    "credential": "e84ebd7c-fb0b-11e5-87e9-873e2343eb75"
+                }
+                ]
+            };
 
 navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
 window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
@@ -56,6 +53,9 @@ function pageReady() {
         alert('Your browser does not support getUserMedia API');
     }
 }
+
+
+
 
 function getUserMediaSuccess(stream) {
     localStream = stream;
@@ -89,7 +89,8 @@ function gotMessageFromServer(message) {
 function gotIceCandidate(event) {
     if(event.candidate != null) {
      //
-        console.log('event.candidate: '+event.candidate);
+        console.log('---- event.candidate ----');
+        cosol.log('JSON.stringify(event.candidate)');
    //     serverConnection.send(JSON.stringify({'ice': event.candidate}));
     }
 }
@@ -98,7 +99,8 @@ function gotDescription(description) {
     console.log('got description');
     peerConnection.setLocalDescription(description, function () {
    //
-        console.log('description:'+description);
+        console.log('---- description ----');
+                cosol.log('JSON.stringify(description)');
  //       serverConnection.send(JSON.stringify({'sdp': description}));
     }, function() {console.log('set description error')});
 }
