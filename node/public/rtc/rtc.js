@@ -1,7 +1,37 @@
 var localVideo;
 var remoteVideo;
 var peerConnection;
-var peerConnectionConfig = {'iceServers': [{'url': 'stun:stun.services.mozilla.com'}, {'url': 'stun:stun.l.google.com:19302'}]};
+var peerConnectionConfig = {        "iceServers": [
+            {
+                "url": "stun:turn01.uswest.xirsys.com"
+            },
+            {
+                "username": "e84ebc96-fb0b-11e5-86ed-65978be131e0",
+                "url": "turn:turn01.uswest.xirsys.com:443?transport=udp",
+                "credential": "e84ebd7c-fb0b-11e5-87e9-873e2343eb75"
+            },
+            {
+                "username": "e84ebc96-fb0b-11e5-86ed-65978be131e0",
+                "url": "turn:turn01.uswest.xirsys.com:443?transport=tcp",
+                "credential": "e84ebd7c-fb0b-11e5-87e9-873e2343eb75"
+            },
+            {
+                "username": "e84ebc96-fb0b-11e5-86ed-65978be131e0",
+                "url": "turn:turn01.uswest.xirsys.com:5349?transport=udp",
+                "credential": "e84ebd7c-fb0b-11e5-87e9-873e2343eb75"
+            },
+            {
+                "username": "e84ebc96-fb0b-11e5-86ed-65978be131e0",
+                "url": "turn:turn01.uswest.xirsys.com:5349?transport=tcp",
+                "credential": "e84ebd7c-fb0b-11e5-87e9-873e2343eb75"
+            }
+        ]
+};
+
+
+
+
+
 
 navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
 window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
