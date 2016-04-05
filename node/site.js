@@ -41,8 +41,9 @@ app.get('/', function (req, res) {
 app.get('/pass/', function(req, res){
   var file = __dirname + '/public/pass/hindstein.pkpass';
     res.setHeader('Content-type', 'application/vnd.apple.pkpass');
-    res.download(file);
-    res.sendStatus(200);
+    res.setHeader('Last-Modified', 'Mon, 03 Apr 2016 19:01:35 GMT');
+    res.sendFile(file);
+
 });
 
 //---------------------------------------------------------------//
@@ -103,11 +104,7 @@ app.get('/passUpdate/v1/passes/*', function(req, res){
     var file = __dirname + '/public/pass/hindstein.pkpass';
     res.setHeader('Content-type', 'application/vnd.apple.pkpass');
     res.setHeader('Last-Modified', 'Mon, 03 Apr 2016 19:01:35 GMT');
-    //console.log(new Date().toUTCString());
-    //res.attachment(file);
-    //res.download(file);
     res.sendFile(file);
-    //res.sendStatus(200);
 });
 
 // Unregistering a Device
