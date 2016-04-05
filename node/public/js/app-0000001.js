@@ -45,7 +45,6 @@
     }
     
     if(loc =='/admin/video/'){  
-    authAdmin();
     window.addEventListener("load", getIce);
     }
 
@@ -216,12 +215,14 @@
     
     function getIce(){
          socket.emit('getIce',{room:'founders'});
+         console.log('Sending for Ice');
     }
     
 //----- Incoming Socket
 
 //-- Get Ice
   socket.on('getIce', function (data) {
+        console.log('We Have Ice');
        condole.log(data.ice);
   });
 
