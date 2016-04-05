@@ -90,7 +90,7 @@ function gotIceCandidate(event) {
     if(event.candidate != null) {
      //
         console.log('---- event.candidate ----');
-        cosol.log('JSON.stringify(event.candidate)');
+        console.log('JSON.stringify(event.candidate)');
    //     serverConnection.send(JSON.stringify({'ice': event.candidate}));
     }
 }
@@ -100,7 +100,7 @@ function gotDescription(description) {
     peerConnection.setLocalDescription(description, function () {
    //
         console.log('---- description ----');
-                cosol.log('JSON.stringify(description)');
+                console.log('JSON.stringify(description)');
  //       serverConnection.send(JSON.stringify({'sdp': description}));
     }, function() {console.log('set description error')});
 }
