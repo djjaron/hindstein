@@ -275,7 +275,7 @@ io.on('connection', function (socket) {
     });
     
     // getIce
- //   socket.on('getIce', function(data){
+    socket.on('getIce', function(data){
         
         var room = data.room;
 
@@ -300,7 +300,7 @@ io.on('connection', function (socket) {
             }
         });
        
- //   });
+    });
     
         
     //------------------- TWILLIO --------------------- 

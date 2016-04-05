@@ -13,7 +13,9 @@
 ///---------------------- START ------------------------    
  
 //---- Grab a socket
-   var socket = io.connect('https://hindste.in', {secure: true});
+
+
+   var socket = io.connect('https://hindste.in', {secure: true, origins: '*:*'});
 
 //---- Event Listeners
     var loc = window.location.pathname;
